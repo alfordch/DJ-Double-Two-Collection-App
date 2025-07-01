@@ -20,5 +20,11 @@ export default defineConfig(({ mode }) => {
       outDir: '../DJDoubleTwoAPI/client-build',
       emptyOutDir: true,
     },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+
   };
 });
