@@ -1,35 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
+import { ThemeProvider } from '@/components/theme-provider'
+import { ModeToggle } from '@/components/mode-toggle'
+import { Separator } from "@/components/ui/separator"
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more Hello
-      </p>
-    </>
+    <ThemeProvider>
+      <SidebarProvider>
+        <AppSidebar />
+        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+          <SidebarTrigger className="-ml-1" />
+          {/* <Separator
+            orientation="vertical"
+            className="mr-2 data-[orientation=vertical]:h-4"
+          /> */}
+          <ModeToggle />
+          <Separator
+            orientation="vertical"
+            className="mr-2 data-[orientation=vertical]:h-4"
+          />
+          Header
+        </header>
+      </SidebarProvider>
+    </ThemeProvider>
   )
 }
-
-export default App
