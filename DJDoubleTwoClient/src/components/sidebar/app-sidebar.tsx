@@ -24,7 +24,7 @@ const data = {
   ],
   headerItems: {
     name: "DDT Logo",
-    icon: "/DJDoubleTwo_Acronym_Logo_2.png",
+    icon: "/DJDoubleTwo_IV_Logo.png",
     title: "DJ Double Two",
     subhead: "Media Collection",
   },

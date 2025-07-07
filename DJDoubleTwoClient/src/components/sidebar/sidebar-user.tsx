@@ -17,7 +17,6 @@ export function AppSidebarUser({ user }: {
   user: {
     name: string
     avatar: string
-    /* avatar: LucideIcon */
     fallback: LucideIcon
   }
 }) {
