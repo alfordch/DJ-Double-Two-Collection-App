@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/theme/mode-toggle"
+/* import { ModeToggle } from "@/components/theme/mode-toggle" */
 
 import {
   SidebarHeader,
@@ -20,7 +20,7 @@ export function AppSidebarHeader({ headerItems }: {
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" asChild>
-                        <a href="#" className="flex items-center gap-2">
+                        <a href="/" className="flex items-center gap-2">
                         <div className="text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                             <img
                             src={headerItems.icon}

@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import {
   SidebarGroup,
@@ -27,12 +28,10 @@ export function NavMain({navItems}: {
         {navItems.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url} className="flex items-center gap-2">
-                <item.icon className="size-5" />
-                <span /* className="group-data-[collapsible=collapsed]:hidden" */>
-                  {item.name}
-                </span>
-              </a>
+              <Link to={item.url} className="flex items-center gap-2">
+                <item.icon className="size-4" />
+                <span>{item.name}</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

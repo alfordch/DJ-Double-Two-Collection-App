@@ -18,9 +18,9 @@ import {
 
 const data = {
   navItems: [
-    { name: "Artists", url: "#3", icon: MicVocal },
-    { name: "Tracks", url: "#2", icon: Music },
-    { name: "Items", url: "#1", icon: Disc3 },
+    { name: "Tracks", url: "/tracks", icon: Music },
+    { name: "Artists", url: "/artists", icon: MicVocal },
+    { name: "Items", url: "/items", icon: Disc3 },
   ],
   headerItems: {
     name: "DDT Logo",

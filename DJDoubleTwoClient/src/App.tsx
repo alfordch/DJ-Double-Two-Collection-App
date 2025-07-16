@@ -1,25 +1,36 @@
 import { useState } from 'react'
+import { Routes, Route } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
 import { ThemeProvider } from '@/components/theme/theme-provider'
-import { ModeToggle } from '@/components/theme/mode-toggle'
-import { Separator } from "@/components/ui/separator"
+import { MainHeader } from '@/components/main-header'
+
+// Main content
+import Artists from "@/components/main-content/artists"
+import Tracks from "@/components/main-content/tracks"
+import Items from "@/components/main-content/items"
 
 export default function App({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
-      <SidebarProvider>
+
+      <SidebarProvider style={{ "--sidebar-width": "13rem" } as React.CSSProperties}>
+
         <AppSidebar />
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <ModeToggle />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-          Header
-        </header>
+
+        <SidebarInset style={{ marginLeft: "-1rem" } as React.CSSProperties}>
+
+          <Routes>
+            <Route path="/" element={<Tracks />} />
+            <Route path="/artists" element={<Artists />} />
+            <Route path="/tracks" element={<Tracks />} />
+            <Route path="/items" element={<Items />} />
+          </Routes>
+
+        </SidebarInset>
+
       </SidebarProvider>
+
     </ThemeProvider>
   )
 }
