@@ -12,7 +12,7 @@ export default function Items() {
       </div>
 
       {/* Separator */}
-      <Separator orientation="horizontal" className="w-full mt-2 mb-4" />
+      <Separator orientation="horizontal" className="w-full mb-4" />
 
       {/* Search Results */}
       <div className="flex flex-col ml-4">

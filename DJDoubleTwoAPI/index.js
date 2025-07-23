@@ -1,9 +1,25 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// Middlewares, if any
+// Allowed origin
+const allowedOrigin =
+  process.env.NODE_ENV === 'production'
+    ? 'https://your-production-domain.com' // e.g., https://myapp.com
+    : 'http://localhost:5173'; // Vite dev server during development
+
+// ✅ Secure CORS configuration
+app.use(
+  cors({
+    origin: allowedOrigin,
+    methods: ['GET'/* , 'POST', 'PUT', 'DELETE' */], // Only allow necessary HTTP methods
+    credentials: true, // If you need cookies or auth headers
+  })
+);
+
+// Middlewares
 app.use(express.json());
 
 // API routes

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Shuffle } from "lucide-react"
+
 
 export function AppInput({
   placeholder = "Search...",
@@ -27,6 +29,9 @@ export function AppInput({
       />
       <Button type="submit" variant="outline">
         {buttonLabel}
+      </Button>
+      <Button type="button" variant="outline" onClick={() => { if (onSubmit) onSubmit("__shuffle__")}}>
+        <Shuffle/>
       </Button>
     </form>
   )
