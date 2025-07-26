@@ -26,8 +26,8 @@ app.use(express.json());
 const tracksRoutes = require('./routes/tracks');
 app.use('/tracks', tracksRoutes);
 
-/* const artistRoutes = require('./routes/artists');
-app.use('/artists', artistRoutes); */
+const artistRoutes = require('./routes/artists');
+app.use('/artists', artistRoutes);
 
 const itemsRoutes = require('./routes/items');
 app.use('/items', itemsRoutes);

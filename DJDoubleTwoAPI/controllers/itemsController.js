@@ -3,7 +3,6 @@ const db = require('../config/config');
 const itemsQuery = `
     SELECT
         i.ItemName, 
-        -- group_concat(DISTINCT a.artistname order by a.artistname separator ', ') as ArtistNames,
         (SELECT GROUP_CONCAT(DISTINCT a.artistname order by a.artistname separator ', ')
             FROM ItemArtists ia
             JOIN Artists a ON ia.ArtistID = a.ArtistID

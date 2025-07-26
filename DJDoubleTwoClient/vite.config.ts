@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/tracks': 'http://localhost:3000',
         '/items': 'http://localhost:3000',
+        '/artists': 'http://localhost:3000',
       },
     },
     build: {
