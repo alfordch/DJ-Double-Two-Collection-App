@@ -13,7 +13,8 @@ const itemsQuery = `
         MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
         YEAR(i.ItemReleaseDate) AS ItemReleaseYear, 
         i.ItemLabel, 
-        i.ItemTrackCount
+        i.ItemTrackCount,
+        i.ItemCoverImage
     FROM
         items i
     WHERE
@@ -39,7 +40,8 @@ const itemsRandQuery = `
         MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
         YEAR(i.ItemReleaseDate) AS ItemReleaseYear, 
         i.ItemLabel, 
-        i.ItemTrackCount
+        i.ItemTrackCount,
+        i.ItemCoverImage
     FROM
         itemartists ia
     INNER JOIN

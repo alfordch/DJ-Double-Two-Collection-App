@@ -21,6 +21,7 @@ const tracksQuery = `
         AS TrackFeatures,
         i.ItemName,
         i.ItemLabel,
+        i.ItemCoverImage,
         DAY(i.ItemReleaseDate) AS ItemReleaseDay,
         MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
         YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
@@ -46,6 +47,11 @@ const tracksQuery = `
             FROM TrackFeatures tf
             JOIN Artists a3 ON tf.FeatureID = a3.ArtistID
             WHERE tf.TrackID = t.TrackID AND a3.ArtistName LIKE ?)
+        OR EXISTS (SELECT 1
+            FROM TrackArtists ta
+            JOIN GroupMembers gm ON ta.ArtistID = gm.GroupID
+            JOIN Artists ag ON gm.MemberID = ag.ArtistID
+            WHERE ta.TrackID = t.TrackID AND ag.ArtistName LIKE ?)
     ORDER BY
         t.TrackID;
   `
@@ -58,6 +64,7 @@ const tracksRandQuery = `
         GROUP_CONCAT(DISTINCT a3.ArtistName ORDER BY a3.ArtistName ASC SEPARATOR ', ') AS TrackFeatures,
         i.ItemName,
         i.ItemLabel,
+        i.ItemCoverImage,
         DAY(i.ItemReleaseDate) AS ItemReleaseDay,
         MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
         YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
@@ -99,7 +106,7 @@ exports.getRandTracks = (req, res) => {
 
 exports.searchTracks = (req, res) => {
   const searchTerm = `%${req.query.q || ''}%`;
-  const values = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
+  const values = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
 
   db.query(tracksQuery, values, (err, results) => {
     if (err) {
