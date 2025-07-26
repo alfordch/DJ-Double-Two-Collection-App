@@ -7,15 +7,15 @@ const port = 3000;
 // Allowed origin
 const allowedOrigin =
   process.env.NODE_ENV === 'production'
-    ? 'https://your-production-domain.com' // e.g., https://myapp.com
-    : 'http://localhost:5173'; // Vite dev server during development
+    ? 'https://your-production-domain.com' 
+    : 'http://localhost:5173'; 
 
 // ✅ Secure CORS configuration
 app.use(
   cors({
     origin: allowedOrigin,
-    methods: ['GET'/* , 'POST', 'PUT', 'DELETE' */], // Only allow necessary HTTP methods
-    credentials: true, // If you need cookies or auth headers
+    methods: ['GET'/* , 'POST', 'PUT', 'DELETE' */],
+    credentials: true,
   })
 );
 
@@ -25,6 +25,12 @@ app.use(express.json());
 // API routes
 const tracksRoutes = require('./routes/tracks');
 app.use('/tracks', tracksRoutes);
+
+/* const artistRoutes = require('./routes/artists');
+app.use('/artists', artistRoutes); */
+
+const itemsRoutes = require('./routes/items');
+app.use('/items', itemsRoutes);
 
 // Serve static files from client build
 app.use(express.static(path.join(__dirname, 'client-build')));

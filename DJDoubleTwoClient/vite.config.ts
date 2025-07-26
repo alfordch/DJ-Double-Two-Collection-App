@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
       allowedHosts: [env.VITE_ALLOWED_HOST], // from .env
       proxy: {
         '/tracks': 'http://localhost:3000',
+        '/items': 'http://localhost:3000',
       },
     },
     build: {

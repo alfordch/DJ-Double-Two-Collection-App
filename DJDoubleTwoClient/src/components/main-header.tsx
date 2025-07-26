@@ -13,7 +13,6 @@ export function MainHeader({ headertext = "..."}) {
             />
             <h1 className="text-base font-medium">{ headertext }</h1>
 
-            
         </header>
     )
 }

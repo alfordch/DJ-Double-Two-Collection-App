@@ -11,6 +11,7 @@ export default function Tracks() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [searched, setSearched] = useState(false)
+  const [resultsLength, setResultsLength] = useState(0)
 
   const handleSearch = async (query: string) => {
     // Check for empty query
@@ -27,7 +28,7 @@ export default function Tracks() {
         res = await fetch(`/tracks/randTracks`)
       }
       else {
-        res = await fetch(`/tracks/search?q=${encodeURIComponent(query)}`)
+        res = await fetch(`/tracks/searchTracks?q=${encodeURIComponent(query)}`)
       }
 
       if (!res.ok) { 
@@ -37,6 +38,7 @@ export default function Tracks() {
       setSearched(true)
       const data = await res.json()
       setResults(data)
+      setResultsLength(data.length)
     } 
     catch (err) {
       console.error(err)
@@ -60,6 +62,11 @@ export default function Tracks() {
 
       {/* Search Results */}
       <div className="flex flex-col ml-4">
+
+        {!loading && resultsLength !== 0 && searched && (
+          <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} tracks found</p>
+        )}
+        
         {loading && <p className="text-muted-foreground">Loading...</p>}
         
         {error && <p className="text-red-500">{error}</p>}

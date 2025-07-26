@@ -1,10 +1,10 @@
-import { AudioLines } from "lucide-react"
+import { Music } from "lucide-react"
 
 export default function TrackResult({ track }: { track: any }) {
   return (
     <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
       <div className="flex items-center gap-3">
-        <AudioLines className="w-6 h-6 text-muted-foreground" />
+        <Music className="w-10 h-10 bg-accent-foreground rounded-lg p-1 text-muted-foreground" />
         <div className="flex flex-col">
             <p className="font-bold leading-tight">{track.TrackName}</p>
             <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Artist:</span> {track.TrackArtists}</p>
@@ -14,7 +14,7 @@ export default function TrackResult({ track }: { track: any }) {
         </div>
       </div>
       <div className="text-lg font-bold">
-        <p className="text-lg font-bold">{track.TrackLength}</p>
+        <p className="text-lg font-bold rounded-lg p-1 bg-accent">{track.TrackLength}</p>
       </div>
     </div>
   )
