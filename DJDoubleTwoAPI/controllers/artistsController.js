@@ -8,7 +8,8 @@ const artistsQuery = `
         a.ArtistHometown,
         GROUP_CONCAT(DISTINCT g.ArtistName ORDER BY g.ArtistName ASC SEPARATOR ', ') AS GroupMemberships,
         COUNT(DISTINCT ia.ItemID) AS ItemCount,
-        COUNT(DISTINCT gm.groupID) AS GroupCount
+        COUNT(DISTINCT gm.groupID) AS GroupCount,
+        a.ArtistImage
     FROM
         Artists a
     LEFT JOIN
@@ -35,7 +36,8 @@ SELECT
         a.ArtistHometown,
         GROUP_CONCAT(DISTINCT g.ArtistName ORDER BY g.ArtistName ASC SEPARATOR ', ') AS GroupMemberships,
         COUNT(DISTINCT ia.ItemID) AS ItemCount,
-        COUNT(DISTINCT gm.groupID) AS GroupCount
+        COUNT(DISTINCT gm.groupID) AS GroupCount,
+        a.ArtistImage
     FROM
         Artists a
     LEFT JOIN

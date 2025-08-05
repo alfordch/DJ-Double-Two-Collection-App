@@ -20,6 +20,7 @@ export default function Items() {
     }
     try {
       setLoading(true)
+      setSearched(true)
       setError("")
       let res
       
@@ -35,7 +36,6 @@ export default function Items() {
         throw new Error("Fetch Failed")
       }
 
-      setSearched(true)
       const data = await res.json()
       setResults(data)
       setResultsLength(data.length)

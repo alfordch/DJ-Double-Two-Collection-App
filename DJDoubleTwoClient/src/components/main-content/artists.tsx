@@ -20,6 +20,7 @@ export default function Tracks() {
     }
     try {
       setLoading(true)
+      setSearched(true)
       setError("")
       let res
       
@@ -35,7 +36,6 @@ export default function Tracks() {
         throw new Error("Fetch Failed")
       }
 
-      setSearched(true)
       const data = await res.json()
       setResults(data)
       setResultsLength(data.length)

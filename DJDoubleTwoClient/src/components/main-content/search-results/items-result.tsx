@@ -6,11 +6,11 @@ export default function ItemResult({ item }: { item: any }) {
       <div className="flex items-center gap-3">
         
         {item.ItemCoverImage === null && (
-          <Disc3 className="w-10 h-10 bg-accent-foreground rounded-lg p-1 text-muted-foreground" />
+          <Disc3 className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground" />
         )}
         
         {item.ItemCoverImage !== null && (
-          <img src={`/covers/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} className="w-20 h-20 rounded-lg drop-shadow-lg"/>
+          <img src={`/covers/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg"/>
         )}
 
         <div className="flex flex-col">
