@@ -1,0 +1,23 @@
+{
+  "name": "djdoubletwoapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd DJDoubleTwoClient && npm install && npm run build",
+    "start": "cd DJDoubleTwoAPI && npm install && node index.js",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd DJDoubleTwoClient && npm run dev",
+    "dev:server": "cd DJDoubleTwoAPI && nodemon index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

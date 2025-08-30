@@ -1,0 +1,23 @@
+# Node modules and logs
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite / React build output (you build into api/client-build)
+DJDoubleTwoAPI/client-build/
+
+# Environment variables (never commit secrets)
+.env
+**/.env
+
+# OS and editor stuff
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Lock files
+# package-lock.json
+# yarn.lock
