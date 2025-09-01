@@ -4,19 +4,21 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+require('dotenv').config();
+
 // Allowed origin
 const allowedOrigin =
-  process.env.NODE_ENV === 'production'
-    ? 'https://your-production-domain.com' 
-    : process.env.DUNGEON_IP; 
+   process.env.NODE_ENV === 'production'
+      ? 'https://your-production-domain.com' 
+      : process.env.SERVER_IP; 
 
 // Secure CORS configuration
 app.use(
-  cors({
-    origin: allowedOrigin,
-    methods: ['GET', 'POST'/*, 'PUT', 'DELETE' */],
-    credentials: true,
-  })
+   cors({
+      origin: allowedOrigin,
+      methods: ['GET', 'POST'],
+      credentials: true,
+   })
 );
 
 // Middlewares
@@ -40,10 +42,10 @@ app.use(express.static(path.join(__dirname, 'client-build')));
 
 // Catch-all route to React frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client-build', 'index.html'));
+   res.sendFile(path.join(__dirname, 'client-build', 'index.html'));
 });
 
 // Listen on all interfaces for external access
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running at http://0.0.0.0:${port}`);
+   console.log(`Server running at http://0.0.0.0:${port}`);
 });
