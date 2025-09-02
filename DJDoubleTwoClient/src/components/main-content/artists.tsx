@@ -61,7 +61,7 @@ export default function Artists() {
          
          const tempSlices = []
          for (let i = 0; i < data.length; i += resultsPerPage) {
-         tempSlices.push(data.slice(i, i + resultsPerPage))
+            tempSlices.push(data.slice(i, i + resultsPerPage))
          }
          
          setResultsPages(tempSlices)
@@ -119,6 +119,10 @@ export default function Artists() {
 
             {!searched && <p className="text-muted-foreground">No results yet...</p>}
             
+            {!loading && searched && totalPages == 1 && 
+               <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
+            }
+
             {!loading && searched && totalPages > 1 && 
                <div>
                   <Pagination>

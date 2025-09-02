@@ -5,11 +5,11 @@ export default function TrackResult({ track }: { track: any }) {
     <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
       <div className="flex items-center gap-3">
         {track.ItemCoverImage === null && (
-          <Music className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground" />
+          <Music className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground cursor-pointer" />
         )}
         
         {track.ItemCoverImage !== null && (
-          <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg"/>
+          <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg cursor-pointer"/>
         )}
 
         <div className="flex flex-col">
