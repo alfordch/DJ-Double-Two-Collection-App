@@ -5,11 +5,11 @@ export default function ArtistResult({ artist }: { artist: any }) {
     <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
       <div className="flex items-center gap-3">
 
-        {artist.ArtistImage === null && (
+        {(artist.ArtistImage === null || artist.ArtistImage === 'None')  && (
           <MicVocal className="w-25 h-25 bg-accent rounded-lg p-1 text-muted-foreground" />
         )}
 
-        {artist.ArtistImage !== null && (
+        {(artist.ArtistImage !== null && artist.ArtistImage !== 'None') && (
           <img src={`/artistImages/${artist.ArtistImage}`} alt={`${artist.ArtistName} image`} className="w-25 h-25 rounded-lg drop-shadow-lg object-cover"/>
         )}
         <div className="flex flex-col">
