@@ -26,6 +26,7 @@ export default function Items() {
    const [totalPages, setTotalPages] = useState(0)
    const [resultsPages, setResultsPages] = useState<any[]>([])
    const [resultsPerPage, setResultsPerPage] = useState(25)
+   const [currentPaginationList, setCurrentPaginationList] = useState<any>([])
    const [currentPage, setCurrentPage] = useState(0)
 
    const handleSearch = async (query: string) => {
@@ -63,7 +64,15 @@ export default function Items() {
          for (let i = 0; i < data.length; i += resultsPerPage) {
             tempSlices.push(data.slice(i, i + resultsPerPage))
          }
-         
+
+         let tempPaginationList: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+         tempPaginationList = tempPaginationList.filter((element: number) => element <= tempSlices.length)
+
+         if (tempSlices.length > 5) {
+            tempPaginationList = [1, 2, 3, 4, 5, <PaginationEllipsis />]
+         }
+
+         setCurrentPaginationList(tempPaginationList)
          setResultsPages(tempSlices)
       } 
       catch (err) {
@@ -78,6 +87,24 @@ export default function Items() {
    const handlePageChange = (pageValue: number) => {
       if (pageValue === -1 || pageValue === totalPages) {
          return
+      }
+      // I am not proud of the rest of the code in this function, I will not lie
+      if (!currentPaginationList.includes(pageValue + 1)) {
+         let tempPaginationList: any[] = Array.from({ length: 5 }, (_, i) => (Math.floor(pageValue / 5) * 5) + 1 + i);
+         
+         if (tempPaginationList[tempPaginationList.length - 1] > totalPages) {
+            tempPaginationList = tempPaginationList.filter((element: number) => element <= totalPages)
+         }
+         
+         if (tempPaginationList[0] !== 1) {
+            tempPaginationList.unshift(<PaginationEllipsis />)
+         }
+         
+         if (tempPaginationList[tempPaginationList.length - 1] < totalPages) {
+            tempPaginationList.push(<PaginationEllipsis />)
+         }
+         
+         setCurrentPaginationList(tempPaginationList)
       }
       setCurrentPage(pageValue)
       setResults(resultsPages[pageValue])
@@ -123,30 +150,45 @@ export default function Items() {
                <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
             }
 
-            {!loading && searched && totalPages > 1 && 
+            {!loading && searched && totalPages > 1 &&
                <div>
                   <Pagination>
                      <PaginationContent>
-                        <PaginationItem className="cursor-pointer">
-                           <div onClick={() => handlePageChange(currentPage - 1)}><PaginationPrevious/></div>
-                        </PaginationItem>
-                        {Array.from({ length : totalPages }, (_: any, index: any) => index).map(function(idx) {
-                           if (idx === currentPage) {
-                           return(
-                              <PaginationItem className="cursor-pointer" key={idx}>
-                                 <PaginationLink isActive>{idx + 1}</PaginationLink>
-                              </PaginationItem>
-                           )
+                        {currentPage > 0 && 
+                           <PaginationItem className="cursor-pointer">
+                              <div onClick={() => handlePageChange(currentPage - 1)}><PaginationPrevious/></div>
+                           </PaginationItem>
+                        }
+                        {currentPaginationList.map((page: any, idx: any) => {
+                           // Load ellipsis
+                           if (typeof page != "number") {
+                              return(
+                                 <PaginationItem key={idx}>
+                                    <PaginationLink>{page}</PaginationLink>
+                                 </PaginationItem>
+                              )
                            }
-                           return(
-                              <PaginationItem className="cursor-pointer" key={idx}>
-                                 <div onClick={() => handlePageChange(idx)}><PaginationLink>{idx + 1}</PaginationLink></div>
-                              </PaginationItem>
-                           )
-                        })}
-                        <PaginationItem className="cursor-pointer">
-                           <div onClick={() => handlePageChange(currentPage + 1)}><PaginationNext/></div>
-                        </PaginationItem>
+                           if (page - 1 === currentPage) {
+                              return(
+                                 <PaginationItem className="cursor-pointer" key={idx}>
+                                    <PaginationLink isActive>{page}</PaginationLink>
+                                 </PaginationItem>
+                              )
+                           }
+                           else {
+                              return(
+                                 <PaginationItem className="cursor-pointer" key={idx}>
+                                    <PaginationLink onClick={() => handlePageChange(page - 1)}>{page}</PaginationLink>
+                                 </PaginationItem>
+                              )
+                           }
+                        }
+                        )}
+                        {currentPage < totalPages - 1 &&
+                           <PaginationItem className="cursor-pointer">
+                              <div onClick={() => handlePageChange(currentPage + 1)}><PaginationNext/></div>
+                           </PaginationItem>
+                        }
                      </PaginationContent>
                   </Pagination>
                   <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
