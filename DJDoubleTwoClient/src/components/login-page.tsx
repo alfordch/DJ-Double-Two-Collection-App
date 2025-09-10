@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { LoginForm } from './login-form'
-import { ModeToggle } from '@/components/theme/mode-toggle'
 
-export default function LoginPage({ setLoginState }: any) {
+export default function LoginPage() {
    return (
       <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
          <div className="flex w-full max-w-sm flex-col gap-6">
@@ -12,7 +11,7 @@ export default function LoginPage({ setLoginState }: any) {
                   </div>
                   djdoubletwo.net
                </a>
-               <LoginForm setLoginState = { setLoginState }/>
+               <LoginForm />
          </div>
       </div>
    )
