@@ -2,6 +2,7 @@ import { useState, useEffect }from "react"
 import { NavMain } from "@/components/sidebar/nav-main"
 import { AppSidebarHeader } from "@/components/sidebar/sidebar-header"
 import { AppSidebarUser } from "@/components/sidebar/sidebar-user"
+import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
 import {
   Sidebar,
@@ -13,7 +14,6 @@ import {
   MicVocal,
   Music,
   Disc3,
-  User,
   LibraryBig,
 } from "lucide-react"
 
@@ -29,27 +29,22 @@ const data = {
     title: "DJ Double Two",
     subhead: "Media Collection",
   },
-  user: {
-    name: "Log In",
-    avatar: "",
-    fallback: User,
-  }
 }
 
-export function AppSidebar({loggedIn, ...props }: any) {
+export function AppSidebar({...props }: any) {
   const [reload, setReload] = useState("");
+  const { userLoggedIn } = useGlobalAppState();
 
   useEffect(() => {
     // Handle showing the selections route and footer user
-    if (loggedIn && data.navItems.length < 4) {
+    if (userLoggedIn.userLoggedIn && data.navItems.length < 4) {
       data.navItems.push({ name: "Selections", url: "/selections", icon: LibraryBig });
-      data.user.name = localStorage.getItem("displayName")!.toString();
       setReload("new")
     }
-    if (!loggedIn && data.navItems.length == 4) {
+    if (!userLoggedIn && data.navItems.length == 4) {
       data.navItems.pop();
     }
-  }, [loggedIn]);
+  }, [userLoggedIn]);
 
   return (
     <Sidebar variant="floating" collapsible="icon" className="transition-all duration-200" {...props}>
@@ -58,7 +53,7 @@ export function AppSidebar({loggedIn, ...props }: any) {
         <NavMain navItems={data.navItems} />
       </SidebarContent>
       <SidebarFooter>
-        <AppSidebarUser user={data.user} loggedIn={loggedIn} />
+        <AppSidebarUser />
       </SidebarFooter>
     </Sidebar>
   )

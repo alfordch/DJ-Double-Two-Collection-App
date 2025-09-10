@@ -1,5 +1,6 @@
-import { LucideIcon, LogIn, LogOut } from "lucide-react"
+import { LucideIcon, LogIn, LogOut, User } from "lucide-react"
 import { Link } from "react-router-dom"
+import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
 import {
    SidebarMenu,
@@ -20,23 +21,22 @@ import {
    TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-export function AppSidebarUser({ user, loggedIn }: {
-   user: {
-      name: string
-      avatar: string
-      fallback: LucideIcon
-   },
-   loggedIn: any
-   }) {
-
+export function AppSidebarUser({ ...props }: any) {
+   const { userLoggedIn } = useGlobalAppState()
+   const { setState } = useGlobalAppState()
    const { isMobile } = useSidebar()
-   let userAcronym = user.name.match(/[A-Z]/g)?.slice(0,2)
-
+   
    // Logout still goes to the login page, but that is fine in case a user wants to immediately log back in
    const handleLogout = async() => {
-      if (loggedIn) {
-      localStorage.clear()
-      window.location.reload()
+      if (userLoggedIn.userLoggedIn) {
+         localStorage.clear()
+         setState({
+            userLoggedIn: false,
+            userName: 'Log In',
+            displayName: 'Log In',
+            avatar: '',
+         })
+         window.location.reload()
       }
       return
    }
@@ -46,40 +46,26 @@ export function AppSidebarUser({ user, loggedIn }: {
          <SidebarMenuItem onClick={handleLogout}>
             <Tooltip>
                <TooltipTrigger asChild>
-               {!loggedIn ?
                   <Link to="/users">
                      <SidebarMenuButton size="lg" className="cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                     <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback className="rounded-lg">
-                           <user.fallback/>
-                        </AvatarFallback>
-                     </Avatar>
-                     <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-medium">{user.name}</span>
-                     </div>
-                     <LogIn className="ml-auto size-4" />
-                     </SidebarMenuButton>
-                  </Link> 
-               :
-                  <Link to="/users">
-                     <SidebarMenuButton size="lg" className="cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                     <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback className="rounded-lg">
-                           { userAcronym  || <user.fallback />}
-                        </AvatarFallback>
-                     </Avatar>
-                     <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-medium">{localStorage.displayName}</span>
-                     </div>
-                     <LogOut className="ml-auto size-4" />
+                        <Avatar className="h-8 w-8 rounded-lg">
+                           <AvatarFallback className="rounded-lg">
+                              {userLoggedIn.userLoggedIn ?
+                                 userLoggedIn.avatar
+                                 :
+                                 <User/>
+                              }
+                           </AvatarFallback>
+                        </Avatar>
+                        <div className="grid flex-1 text-left text-sm leading-tight">
+                           <span className="truncate font-medium">{userLoggedIn.displayName}</span>
+                        </div>
+                        {userLoggedIn.userLoggedIn ? <LogOut className="ml-auto size-4" /> : <LogIn className="ml-auto size-4" />}
                      </SidebarMenuButton>
                   </Link>
-               }
                </TooltipTrigger>
                <TooltipContent>
-               {loggedIn ? <p className="m-1">Logout</p> : <p className="m-1">Login</p>}
+                  {userLoggedIn.userLoggedIn ? <p className="m-1">Logout</p> : <p className="m-1">Login</p>}
                </TooltipContent>
             </Tooltip>
          </SidebarMenuItem>

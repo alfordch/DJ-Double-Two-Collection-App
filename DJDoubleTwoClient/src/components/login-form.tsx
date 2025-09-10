@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { React } from "next/dist/server/route-modules/app-page/vendored/rsc/entrypoints"
 import { ArrowLeft } from "lucide-react"
+import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
 const data = {
    loginItems: {
@@ -28,7 +29,7 @@ const data = {
    }
 }
 
-export function LoginForm({setLoginState, className,...props}: any) {
+export function LoginForm({className,...props}: any) {
    const navigate = useNavigate()
 
    /* true == Login, false == signUp */
@@ -37,40 +38,51 @@ export function LoginForm({setLoginState, className,...props}: any) {
    const [displayName, setDisplayName] = useState("")
    const [password, setPassword] = useState("")
    const [error, setError] = useState("")
+   const { setState } = useGlobalAppState()
 
    const handleSubmit = async (e: React.FormEvent) => {
       localStorage.clear()
+      setState({userLoggedIn: false})
+
       e.preventDefault()
       setError("")
 
       try {
-      const endpoint = login ? "/users/userLogin" : "/users/userSignUp"
-      const body: any = {userName, password }
+         const endpoint = login ? "/users/userLogin" : "/users/userSignUp"
+         const body: any = {userName, password }
 
-      if (!login) {
-         body.displayName = displayName
-      }
+         if (!login) {
+            body.displayName = displayName
+         }
 
-      const res = await fetch(`http://192.168.5.100:3000${endpoint}`, {
-         method: "POST",
-         headers: { "Content-Type": "application/json"},
-         body: JSON.stringify(body)
-      })
+         const res = await fetch(`http://192.168.5.100:3000${endpoint}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(body)
+         })
 
-      const data = await res.json()
+         const data = await res.json()
+ 
+         if (!res.ok) {
+            setError(data.error || "Something went wrong")
+            return
+         }
+         else {
+            /* console.log("Success: ", data) */
+            localStorage.setItem('user', data.token)
+            localStorage.setItem('displayName', data.user.displayName)
+            localStorage.setItem('userName', data.user.userName)
+            let userAcronym: string = data.user.userName.match(/[A-Z]/g)?.slice(0,2)
 
-      if (!res.ok) {
-         setError(data.error || "Something went wrong")
-         return
-      }
-      else {
-         /* console.log("Success: ", data) */
-         localStorage.setItem('user', data.token)
-         localStorage.setItem('displayName', data.user.displayName)
-         localStorage.setItem('userName', data.user.userName)
-         {setLoginState(true)}
-         navigate("/")
-      }
+            setState({
+               userLoggedIn: true,
+               userName: data.user.userName,
+               displayName: data.user.displayName,
+               avatar: userAcronym
+            })
+
+            navigate("/")
+         }
       }
       catch(err) {
       /* console.error(err) */
