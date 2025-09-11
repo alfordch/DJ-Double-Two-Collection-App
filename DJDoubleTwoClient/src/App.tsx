@@ -27,7 +27,7 @@ export default function App() {
                      <Route path="/artists" element={<Artists />} />
                      <Route path="/tracks" element={<Tracks />} />
                      <Route path="/items" element={<Items />} />
-                     <Route path="/selections" element={<Selections />} />
+                     <Route path="/myselections" element={<Selections />} />
                      <Route path="/users" element={<LoginPage />} />
                   </Routes>
                </SidebarInset>
