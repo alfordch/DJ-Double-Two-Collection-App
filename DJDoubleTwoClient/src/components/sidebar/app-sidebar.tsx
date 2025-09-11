@@ -38,7 +38,7 @@ export function AppSidebar({...props }: any) {
   useEffect(() => {
     // Handle showing the selections route and footer user
     if (userLoggedIn.userLoggedIn && data.navItems.length < 4) {
-      data.navItems.push({ name: "Selections", url: "/selections", icon: LibraryBig });
+      data.navItems.push({ name: "My Selections", url: "/myselections", icon: LibraryBig });
       setReload("new")
     }
     if (!userLoggedIn && data.navItems.length == 4) {
