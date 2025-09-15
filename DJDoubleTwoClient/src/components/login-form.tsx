@@ -73,7 +73,11 @@ export function LoginForm({className,...props}: any) {
             localStorage.setItem('displayName', data.user.displayName)
             localStorage.setItem('userName', data.user.userName)
             let userAcronym: string = data.user.userName.match(/[A-Z]/g)?.slice(0,2)
-
+            
+            if (!userAcronym) {
+               userAcronym = data.user.userName[0].toUpperCase()
+            }
+            
             setState({
                userLoggedIn: true,
                userName: data.user.userName,

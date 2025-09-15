@@ -1,10 +1,16 @@
 import { useGlobalAppState } from "@/app-context/app-context"
 import { Music, Plus } from "lucide-react"
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+   Tooltip,
+   TooltipContent,
+   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+   Dialog,
+   DialogTrigger
+} from "@/components/ui/dialog"
+
+import AddToSelectionContent from "@/components/main-content/search-results/track-result/add-to-selection"
 
 export default function TrackResult({ track }: { track: any }) {
    const { userLoggedIn } = useGlobalAppState()
@@ -24,9 +30,14 @@ export default function TrackResult({ track }: { track: any }) {
                {userLoggedIn.userLoggedIn && (
                   <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
                      <Tooltip>
-                        <TooltipTrigger>
-                           <Plus className={`w-15 h-15 ${userLoggedIn.userLoggedIn && 'cursor-pointer'}`}/>
-                        </TooltipTrigger>
+                        <Dialog>
+                           <DialogTrigger>
+                              <TooltipTrigger>
+                                 <Plus className={`w-15 h-15 ${userLoggedIn.userLoggedIn && 'cursor-pointer'}`}/>
+                              </TooltipTrigger>
+                           </DialogTrigger>
+                           <AddToSelectionContent track={track}/>
+                        </Dialog>
                         <TooltipContent>
                            Add to selection
                         </TooltipContent>

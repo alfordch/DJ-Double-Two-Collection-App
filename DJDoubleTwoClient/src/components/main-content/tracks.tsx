@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/pagination"
 
 // Result import
-import TrackResult from "./search-results/tracks-result"
+import TrackResult from "./search-results/track-result/tracks-result"
 
 export default function Tracks() {
    const [results, setResults] = useState<any[]>([])
