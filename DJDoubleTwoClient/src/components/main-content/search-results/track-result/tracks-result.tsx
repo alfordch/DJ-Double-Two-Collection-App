@@ -18,7 +18,7 @@ export default function TrackResult({ track }: { track: any }) {
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
          <div className="flex items-center gap-3">
-            <div className="relative bg-cover bg-no-repeat">
+            <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                {/* Check for db track that does not have an image */}
                {track.ItemCoverImage !== null ?
                   <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg"/>
@@ -32,7 +32,7 @@ export default function TrackResult({ track }: { track: any }) {
                      <Tooltip>
                         <Dialog>
                            <DialogTrigger>
-                              <TooltipTrigger>
+                              <TooltipTrigger asChild>
                                  <Plus className={`w-15 h-15 ${userLoggedIn.userLoggedIn && 'cursor-pointer'}`}/>
                               </TooltipTrigger>
                            </DialogTrigger>
@@ -45,7 +45,7 @@ export default function TrackResult({ track }: { track: any }) {
                   </div>
                )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-1 min-w-0">
                <p className="font-bold leading-tight">{track.TrackName}</p>
                <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Artist:</span> {track.TrackArtists}</p>
                <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Item:</span> {track.ItemName} ({track.ItemLabel}) [{track.ItemReleaseYear}] | {track.TrackItemLoc}</p>
