@@ -53,7 +53,7 @@ export default function TrackResult({ track }: { track: any }) {
                <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Produced By:</span> {track.TrackProducers}</p>
             </div>
          </div>
-         <div className="text-lg font-bold drop-shadow-lg">
+         <div className="text-lg font-bold drop-shadow-lg ml-1">
             <p className="text-lg font-bold rounded-lg p-1 bg-accent">{track.TrackLength}</p>
          </div>
       </div>

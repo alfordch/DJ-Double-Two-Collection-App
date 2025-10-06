@@ -126,7 +126,7 @@ export default function Artists() {
          <div className="flex flex-col ml-4">
 
             {!loading && resultsLength !== 0 && searched && (
-               <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} items found</p>
+               <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} artists found</p>
             )}
             
             {loading && <p className="text-muted-foreground">Loading...</p>}
