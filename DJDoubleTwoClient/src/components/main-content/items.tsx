@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/pagination"
 
 // Result import
-import ItemResult from "./search-results/items-result"
+import ItemResult from "./search-results/item-result/items-result"
 
 export default function Items() {
    const [results, setResults] = useState<any[]>([])

@@ -2,6 +2,7 @@ const db = require('../config/config');
 
 const itemsQuery = `
     SELECT
+        i.ItemID,
         i.ItemName, 
         (SELECT GROUP_CONCAT(DISTINCT a.artistname order by a.artistname separator ', ')
             FROM ItemArtists ia
@@ -33,6 +34,7 @@ const itemsQuery = `
 
 const itemsRandQuery = `
     SELECT
+        i.ItemID,
         i.ItemName, 
         group_concat(DISTINCT a.artistname order by a.artistname separator ', ') as ItemArtists,
         i.ItemFormat, 

@@ -42,14 +42,14 @@ export default function Tracks() {
       
          // Check for shuffle button click
          if (query === '__shuffle__') {
-         res = await fetch(`/tracks/randTracks`)
+            res = await fetch(`/tracks/randTracks`)
          }
          else {
-         res = await fetch(`/tracks/searchTracks?q=${encodeURIComponent(query)}`)
+            res = await fetch(`/tracks/searchTracks?q=${encodeURIComponent(query)}`)
          }
 
          if (!res.ok) { 
-         throw new Error("Fetch Failed")
+            throw new Error("Fetch Failed")
          }
 
          const data = await res.json()
@@ -126,7 +126,7 @@ export default function Tracks() {
          <div className="flex flex-col ml-4">
 
             {!loading && resultsLength !== 0 && searched && (
-               <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} items found</p>
+               <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} tracks found</p>
             )}
             
             {loading && <p className="text-muted-foreground">Loading...</p>}
