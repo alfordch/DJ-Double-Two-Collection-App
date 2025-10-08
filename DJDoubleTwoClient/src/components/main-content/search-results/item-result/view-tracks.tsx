@@ -12,7 +12,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 import TrackResult from "@/components/main-content/search-results/track-result/tracks-result"
 
-export default function ViewTracks({ item, results }: { item: any, results: any}) {
+export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
     return (
         <div>
             <DialogContent showCloseButton={false}>
@@ -26,13 +26,13 @@ export default function ViewTracks({ item, results }: { item: any, results: any}
                     <Separator orientation="horizontal"/>
 
                     <ScrollArea className={`${results.length > 2 && 'h-100'} p-4`}>
-                        {results.length !== 0 &&
+                        {!error ? <span>{results.length !== 0 &&
                             results.map((track: any, idx: any) => (
                                 <div key={idx} className="mb-2">
                                     <TrackResult track={track} key={idx}/>
                                 </div>
                             ))
-                        }
+                        }</span> : <div className="bg-muted p-3 rounded-md"><p className="text-red-500">{error}</p></div> }
 
                         <ScrollBar className="cursor-pointer"/>
                     </ScrollArea>

@@ -43,7 +43,7 @@ export default function ArtistResult({ artist }: { artist: any }) {
                {(artist.ArtistImage !== null && artist.ArtistImage !== 'None') ?
                   <img src={`/artistImages/${artist.ArtistImage}`} alt={`${artist.ArtistName} image`} className="w-25 h-25 rounded-lg drop-shadow-lg object-cover"/>
                :
-                  <MicVocal className="w-25 h-25 bg-accent rounded-lg p-1 text-muted-foreground" />
+                  <MicVocal className="w-25 h-25 bg-accent rounded-lg p-1 text-muted-foreground drop-shadow-lg" />
                }
                <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
                   <Tooltip>
@@ -53,7 +53,7 @@ export default function ArtistResult({ artist }: { artist: any }) {
                               <Search className="w-15 h-15 cursor-pointer" onClick={handleViewRelatedItems}/>
                            </TooltipTrigger>
                         </DialogTrigger>
-                        <ViewRelatedItems artist={artist} results={results}/>
+                        <ViewRelatedItems artist={artist} results={results} error={error}/>
                      </Dialog>
                      <TooltipContent>
                         View Related Items

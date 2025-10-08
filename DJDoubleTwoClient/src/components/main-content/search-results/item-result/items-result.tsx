@@ -54,7 +54,7 @@ export default function ItemResult({ item }: { item: any }) {
                               <Search className="w-15 h-15 cursor-pointer" onClick={handleViewTracks}/>
                            </TooltipTrigger>
                         </DialogTrigger>
-                        <ViewTracks item={item} results={results}/>
+                        <ViewTracks item={item} results={results} error={error}/>
                      </Dialog>
                      <TooltipContent>
                         View Tracks
