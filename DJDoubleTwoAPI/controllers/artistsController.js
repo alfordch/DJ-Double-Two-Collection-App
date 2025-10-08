@@ -29,7 +29,7 @@ const artistsQuery = `
 `
 
 const artistsRandQuery = `
-SELECT
+    SELECT
         a.ArtistID,
         a.ArtistName,
         a.ArtistTags,
