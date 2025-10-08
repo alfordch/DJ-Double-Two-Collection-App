@@ -10,26 +10,26 @@ import {
 } from "@/components/ui/dialog"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
-import TrackResult from "@/components/main-content/search-results/track-result/tracks-result"
+import ItemResult from "@/components/main-content/search-results/item-result/items-result"
 
-export default function ViewTracks({ item, results }: { item: any, results: any}) {
+export default function ViewRelatedItems({ artist, results }: { artist: any, results: any}) {
     return (
         <div>
             <DialogContent showCloseButton={false}>
                 <DialogHeader>
-                    <DialogTitle>Tracks:</DialogTitle>
+                    <DialogTitle>Related Items:</DialogTitle>
                     
                     <DialogDescription>
-                        <span className="font-style: italic font-bold">{item.ItemName} by {item.ItemArtists} [{item.ItemLabel}, {item.ItemReleaseYear}]</span>
+                        <span className="font-style: italic font-bold">{artist.ArtistName}</span>
                     </DialogDescription>
                     
                     <Separator orientation="horizontal"/>
 
                     <ScrollArea className={`${results.length > 2 && 'h-100'} p-4`}>
                         {results.length !== 0 &&
-                            results.map((track: any, idx: any) => (
+                            results.map((item: any, idx: any) => (
                                 <div key={idx} className="mb-2">
-                                    <TrackResult track={track} key={idx}/>
+                                    <ItemResult item={item} key={idx}/>
                                 </div>
                             ))
                         }

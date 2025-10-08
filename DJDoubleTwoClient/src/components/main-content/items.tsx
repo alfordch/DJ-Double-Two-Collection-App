@@ -42,14 +42,14 @@ export default function Items() {
       
          // Check for shuffle button click
          if (query === '__shuffle__') {
-         res = await fetch(`/items/randItems`)
+            res = await fetch(`/items/randItems`)
          }
          else {
-         res = await fetch(`/items/searchItems?q=${encodeURIComponent(query)}`)
+            res = await fetch(`/items/searchItems?q=${encodeURIComponent(query)}`)
          }
 
          if (!res.ok) { 
-         throw new Error("Fetch Failed")
+            throw new Error("Fetch Failed")
          }
 
          const data = await res.json()

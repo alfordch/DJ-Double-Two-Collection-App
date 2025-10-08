@@ -1,6 +1,41 @@
-import { MicVocal } from "lucide-react"
+import { MicVocal, Search } from "lucide-react"
+import { useState } from "react"
+import {
+   Tooltip,
+   TooltipContent,
+   TooltipTrigger,
+} from "@/components/ui/tooltip"
+import {
+   Dialog,
+   DialogTrigger
+} from "@/components/ui/dialog"
+
+import ViewRelatedItems from "@/components/main-content/search-results/artist-result/view-related-items"
 
 export default function ArtistResult({ artist }: { artist: any }) {
+   const [results, setResults] = useState<any[]>([])
+   const [error, setError] = useState("")
+
+   const handleViewRelatedItems = async() => {
+      let res
+      setError("")
+
+      try {
+         res = await fetch(`/items/searchItemsByArtist?q=${encodeURIComponent(artist.ArtistID)}`)
+
+         if (!res.ok) {
+            throw new Error("Fetch Failed")
+         }
+         const data = await res.json()
+         setResults(data)
+      }
+
+      catch (err) {
+         console.error(err)
+         setError("Error Encountered In Call To thedungeon0000 API, Please Try Again Later")
+      }
+   }
+
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
          <div className="flex items-center gap-3">
@@ -10,6 +45,21 @@ export default function ArtistResult({ artist }: { artist: any }) {
                :
                   <MicVocal className="w-25 h-25 bg-accent rounded-lg p-1 text-muted-foreground" />
                }
+               <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
+                  <Tooltip>
+                     <Dialog>
+                        <DialogTrigger>
+                           <TooltipTrigger asChild>
+                              <Search className="w-15 h-15 cursor-pointer" onClick={handleViewRelatedItems}/>
+                           </TooltipTrigger>
+                        </DialogTrigger>
+                        <ViewRelatedItems artist={artist} results={results}/>
+                     </Dialog>
+                     <TooltipContent>
+                        View Related Items
+                     </TooltipContent>
+                  </Tooltip>
+               </div>
             </div>
             
             <div className="flex flex-col flex-1 min-w-0">

@@ -5,5 +5,6 @@ const itemsController = require('../controllers/itemsController');
 // GET /items
 router.get('/searchItems',itemsController.searchItems);
 router.get('/randItems',itemsController.getRandItems);
+router.get('/searchItemsByArtist',itemsController.searchItemsByArtist);
 
 module.exports = router;

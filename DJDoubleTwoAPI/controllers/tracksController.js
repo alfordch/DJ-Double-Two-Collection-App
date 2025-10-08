@@ -126,7 +126,7 @@ const tracksItemQuery = `
    INNER JOIN
       Items i ON t.TrackItem = i.ItemID
    WHERE
-      i.ItemID LIKE ?
+      i.ItemID = ?
    ORDER BY
       t.TrackID;
 `
@@ -155,7 +155,7 @@ exports.getRandTracks = (req, res) => {
 };
 
 exports.searchTracksByItem = (req, res) => {
-    const searchTerm = `%${req.query.q || ''}%`;
+    const searchTerm = `${req.query.q || ''}`;
     const values = [searchTerm];
     
     db.query(tracksItemQuery, values, (err, results) => {

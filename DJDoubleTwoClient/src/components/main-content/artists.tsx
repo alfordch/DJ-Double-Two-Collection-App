@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/pagination"
 
 // Result import
-import ArtistResult from "./search-results/artists-result"
+import ArtistResult from "@/components/main-content/search-results/artist-result/artists-result"
 
 export default function Artists() {
    const [results, setResults] = useState<any[]>([])
@@ -42,14 +42,14 @@ export default function Artists() {
       
          // Check for shuffle button click
          if (query === '__shuffle__') {
-         res = await fetch(`/artists/randArtists`)
+            res = await fetch(`/artists/randArtists`)
          }
          else {
-         res = await fetch(`/artists/searchArtists?q=${encodeURIComponent(query)}`)
+            res = await fetch(`/artists/searchArtists?q=${encodeURIComponent(query)}`)
          }
 
          if (!res.ok) { 
-         throw new Error("Fetch Failed")
+            throw new Error("Fetch Failed")
          }
 
          const data = await res.json()
