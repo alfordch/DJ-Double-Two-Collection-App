@@ -12,7 +12,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 import ItemResult from "@/components/main-content/search-results/item-result/items-result"
 
-export default function ViewRelatedItems({ artist, results }: { artist: any, results: any}) {
+export default function ViewRelatedItems({ artist, results, error }: { artist: any, results: any, error: any}) {
     return (
         <div>
             <DialogContent showCloseButton={false}>
@@ -26,13 +26,13 @@ export default function ViewRelatedItems({ artist, results }: { artist: any, res
                     <Separator orientation="horizontal"/>
 
                     <ScrollArea className={`${results.length > 2 && 'h-100'} p-4`}>
-                        {results.length !== 0 &&
+                        {!error ? <span>{results.length !== 0 &&
                             results.map((item: any, idx: any) => (
                                 <div key={idx} className="mb-2">
                                     <ItemResult item={item} key={idx}/>
                                 </div>
                             ))
-                        }
+                        }</span> : <div className="bg-muted p-3 rounded-md"><p className="text-red-500">{error}</p></div> }
 
                         <ScrollBar className="cursor-pointer"/>
                     </ScrollArea>

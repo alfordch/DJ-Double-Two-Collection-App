@@ -59,39 +59,95 @@ const itemsRandQuery = `
 `
 
 const itemsByArtistQuery = `
-    SELECT DISTINCT
+    (SELECT 
         i.ItemID,
-        i.ItemName, 
-        group_concat(DISTINCT a.artistname order by a.artistname separator ', ') as ItemArtists,
-        i.ItemFormat, 
+        i.ItemName,
+        GROUP_CONCAT(DISTINCT a.artistname ORDER BY a.artistname SEPARATOR ', ') AS ItemArtists,
+        i.ItemFormat,
         DAY(i.ItemReleaseDate) AS ItemReleaseDay,
         MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
-        YEAR(i.ItemReleaseDate) AS ItemReleaseYear, 
-        i.ItemLabel, 
+        YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
+        i.ItemLabel,
         i.ItemTrackCount,
         i.ItemCoverImage
     FROM
         ItemArtists ia
-    INNER JOIN
-        Items i on ia.itemid = i.itemid
-    INNER JOIN
-        Artists a on a.artistid = ia.artistid
-    INNER JOIN
-        Tracks t ON t.TrackItem = i.ItemID
-    LEFT JOIN 
-        TrackArtists ta ON ta.TrackID = t.TrackID
-    LEFT JOIN
-        TrackProducers tp ON tp.TrackID = t.TrackID
-    LEFT JOIN 
-        TrackFeatures tf ON tf.TrackID = t.TrackID
+        INNER JOIN Items i ON ia.ItemID = i.ItemID
+        INNER JOIN Artists a ON a.ArtistID = ia.ArtistID
+        INNER JOIN Tracks t ON t.TrackItem = i.ItemID
+        LEFT JOIN TrackArtists ta ON ta.TrackID = t.TrackID
     WHERE
-        ta.ArtistID = ? OR
-        tf.FeatureID = ? OR
+        ta.ArtistID = ?
+    GROUP BY
+        i.ItemID)
+    UNION
+    (SELECT 
+        i.ItemID,
+        i.ItemName,
+        GROUP_CONCAT(DISTINCT a.artistname ORDER BY a.artistname SEPARATOR ', ') AS ItemArtists,
+        i.ItemFormat,
+        DAY(i.ItemReleaseDate) AS ItemReleaseDay,
+        MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
+        YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
+        i.ItemLabel,
+        i.ItemTrackCount,
+        i.ItemCoverImage
+    FROM
+        ItemArtists ia
+        INNER JOIN Items i ON ia.ItemID = i.ItemID
+        INNER JOIN Artists a ON a.ArtistID = ia.ArtistID
+        INNER JOIN Tracks t ON t.TrackItem = i.ItemID
+        LEFT JOIN TrackFeatures tf ON tf.TrackID = t.TrackID
+    WHERE
+        tf.FeatureID = ?
+    GROUP BY
+        i.ItemID)
+    UNION
+    (SELECT 
+        i.ItemID,
+        i.ItemName,
+        GROUP_CONCAT(DISTINCT a.artistname ORDER BY a.artistname SEPARATOR ', ') AS ItemArtists,
+        i.ItemFormat,
+        DAY(i.ItemReleaseDate) AS ItemReleaseDay,
+        MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
+        YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
+        i.ItemLabel,
+        i.ItemTrackCount,
+        i.ItemCoverImage
+    FROM
+        ItemArtists ia
+        INNER JOIN Items i ON ia.ItemID = i.ItemID
+        INNER JOIN Artists a ON a.ArtistID = ia.ArtistID
+        INNER JOIN Tracks t ON t.TrackItem = i.ItemID
+        LEFT JOIN TrackProducers tp ON tp.TrackID = t.TrackID
+    WHERE
         tp.ProducerID = ?
     GROUP BY
-        i.ItemID, i.ItemName
+        i.ItemID)
+    UNION
+    (SELECT 
+        i.ItemID,
+        i.ItemName,
+        GROUP_CONCAT(DISTINCT a.artistname ORDER BY a.artistname SEPARATOR ', ') AS ItemArtists,
+        i.ItemFormat,
+        DAY(i.ItemReleaseDate) AS ItemReleaseDay,
+        MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
+        YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
+        i.ItemLabel,
+        i.ItemTrackCount,
+        i.ItemCoverImage
+    FROM
+        ItemArtists ia
+        INNER JOIN Items i ON ia.ItemID = i.ItemID
+        INNER JOIN Artists a ON a.ArtistID = ia.ArtistID
+        LEFT JOIN GroupMembers gm ON gm.GroupID = a.ArtistID OR gm.MemberID = a.ArtistID
+        INNER JOIN Tracks t ON t.TrackItem = i.ItemID
+    WHERE
+        gm.MemberID = ? OR gm.GroupID = ?
+    GROUP BY
+        i.ItemID)
     ORDER BY
-        i.ItemID asc;
+        ItemID ASC;
 `
 
 exports.getRandItems = (req, res) => {
@@ -120,7 +176,7 @@ exports.searchItems = (req, res) => {
 
 exports.searchItemsByArtist = (req, res) => {
   const searchTerm = `${req.query.q || ''}`;
-  const values = [searchTerm, searchTerm, searchTerm];
+  const values = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
 
   db.query(itemsByArtistQuery, values, (err, results) => {
     if (err) {
