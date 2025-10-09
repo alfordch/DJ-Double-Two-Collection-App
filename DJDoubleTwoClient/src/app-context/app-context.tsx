@@ -8,6 +8,7 @@ export interface globalAppInterface {
     userName: string;
     displayName: string;
     avatar: string;
+    userID: number;
 }
 
 const globalAppContext = createContext({
@@ -20,6 +21,7 @@ const defaultGlobalState: globalAppInterface = {
     userName: 'Log In',
     displayName: 'Log In',
     avatar: '',
+    userID: -1
 }
 
 const GlobalAppProvider = ({
