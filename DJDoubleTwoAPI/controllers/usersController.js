@@ -91,6 +91,7 @@ exports.userLogin = (req, res) => {
             SELECT userID, userName, displayName, passwordHash 
             FROM Users
             WHERE userName = ? 
+            AND activeUser = 1
             LIMIT 1;
         `;
 

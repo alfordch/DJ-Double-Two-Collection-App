@@ -69,9 +69,10 @@ export function LoginForm({className,...props}: any) {
          }
          else {
             /* console.log("Success: ", data) */
-            localStorage.setItem('user', data.token)
+            /* localStorage.setItem('user', data.token)
             localStorage.setItem('displayName', data.user.displayName)
             localStorage.setItem('userName', data.user.userName)
+            localStorage.setItem('userID', data.user.userID) */
             let userAcronym: string = data.user.userName.match(/[A-Z]/g)?.slice(0,2)
             
             if (!userAcronym) {
@@ -82,7 +83,8 @@ export function LoginForm({className,...props}: any) {
                userLoggedIn: true,
                userName: data.user.userName,
                displayName: data.user.displayName,
-               avatar: userAcronym
+               avatar: userAcronym,
+               userID: data.user.userID
             })
 
             navigate("/")
