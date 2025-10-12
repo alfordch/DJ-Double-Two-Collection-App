@@ -4,7 +4,11 @@ const selectionsController = require('../controllers/selectionsController');
 
 // GET /selections
 router.get('/getSelections', selectionsController.getSelections);
+router.get('/getRandSelection', selectionsController.getRandSelection);
+router.get('/searchSelectionByName', selectionsController.searchSelectionByName);
 
 // POST /selections
+router.post('/createSelection', selectionsController.createSelection);
+
 
 module.exports = router;

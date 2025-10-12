@@ -37,6 +37,9 @@ app.use('/items', itemsRoutes);
 const usersRoutes = require('./routes/users');
 app.use('/users', usersRoutes);
 
+const selectionsRoutes = require('./routes/selections');
+app.use('/selections', selectionsRoutes);
+
 // Serve static files from client build
 app.use(express.static(path.join(__dirname, 'client-build')));
 
