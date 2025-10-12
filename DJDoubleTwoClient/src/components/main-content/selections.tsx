@@ -2,19 +2,50 @@ import { useState } from "react"
 import { AppInput } from "@/components/input/app-input"
 import { MainHeader } from "@/components/main-header"
 import { Separator } from "@/components/ui/separator"
+import {
+   Pagination,
+   PaginationContent,
+   PaginationEllipsis,
+   PaginationItem,
+   PaginationLink,
+   PaginationNext,
+   PaginationPrevious,
+} from "@/components/ui/pagination"
 import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
-export default function Selections() {
-    const { userLoggedIn } = useGlobalAppState()
+import SelectionResult from "@/components/main-content/search-results/selection-result"
 
-    return (
-        <div className="flex flex-col px-4">
-            <div className="flex items-center">
-                <MainHeader headertext="My Selections" />
-                {/* <AppInput placeholder="Artists..." buttonLabel="Search" /> */}
-                
-            </div>
-            <Separator orientation="horizontal" className="w-full mb-4" />
-        </div>
-    )
+export default function Selections() {
+   const [results, setResults] = useState<any[]>([])
+   const [error, setError] = useState("")
+
+   const handleSubmit = async (query: string) => {
+      if (!query) {
+         return
+      }
+      try {
+         let res
+         const body: any = {}
+         if (query === '__new__') {
+            res = await fetch('/selections/createSelection', {
+               method: "POST",
+               headers: { "Content-Type": "application/json" }
+            })
+         }
+      }
+      catch (err) {
+         console.error(err)
+         setError("Error Encountered In Call To thedungeon0000 API, Please Try Again Later")
+      }
+   }
+   return (
+      <div className="flex flex-col px-4">
+         <div className="flex items-center">
+            <MainHeader headertext="My Selections" />
+            <AppInput placeholder="My Selections..." buttonLabel="Search" />
+         </div>
+
+         <Separator orientation="horizontal" className="w-full mb-4" />
+      </div>
+   )
 }

@@ -49,7 +49,7 @@ export function LoginForm({className,...props}: any) {
 
       try {
          const endpoint = login ? "/users/userLogin" : "/users/userSignUp"
-         const body: any = {userName, password }
+         const body: any = { userName, password }
 
          if (!login) {
             body.displayName = displayName
@@ -57,7 +57,7 @@ export function LoginForm({className,...props}: any) {
 
          const res = await fetch(`http://192.168.5.100:3000${endpoint}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
          })
 
