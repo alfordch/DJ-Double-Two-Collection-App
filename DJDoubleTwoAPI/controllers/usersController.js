@@ -34,8 +34,8 @@ exports.userSignUp = (req, res) => {
 
          // Users table insert
          const signUpQuery = `
-               INSERT INTO Users (userName, displayName, passwordHash)
-               VALUES(?, ?, ?);
+               INSERT INTO Users (userName, displayName, passwordHash, lastLogin)
+               VALUES(?, ?, ?, GETDATE());
          `;
 
          db.query(signUpQuery, [userName, displayName, hash], (signUpErr) => {

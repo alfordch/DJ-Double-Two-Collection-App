@@ -95,14 +95,14 @@ exports.getRandSelection = (req, res) => {
 
 const createSelectionQuery = `
    INSERT INTO
-      UsersSelections us (selectionUser, selectionName)
+      UserSelections (selectionUser, selectionName)
    VALUES
-      (?, ?);
+      (UUID_TO_BIN(?), ?);
 `
 
 exports.createSelection = (req, res) => {
-   const parameters = `${req.query.q || ''}`;
-   const values = [ parameters, parameters ];
+   const parameters = req.body;
+   const values = [ parameters['userID'], parameters['selectionName'] ];
 
    db.query(createSelectionQuery, values, (err, results) => {
       if (err) {
@@ -110,14 +110,24 @@ exports.createSelection = (req, res) => {
          return res.status(500).json({ error: 'Selection creation failed' });
       }
 
-      // check insert status
-      /* const getSelectionQuery = `
+      // Check insert status (if successful)
+      const getSelectionQuery = `
          SELECT
-            BIN_TO_UUID(selectionUser) AS userID, selectionName, createdAt
-         FROM
-            userSelections
-         WHERE
+            BIN_TO_UUID(selectionUser), BIN_TO_UUID(selectionID), selectionName, createdAt
+         FROM 
+            UserSelections
+         WHERE 
+            selectionUser = UUID_TO_BIN(?)
+            AND selectionName = ?
+         LIMIT
+            1;
+      `
 
-      ` */
+      db.query(getSelectionQuery, values, (getSelectionErr, results) => {
+         if (getSelectionErr) {
+            return res.status(201).json({message: "Selection created. Issue found with getting selection information", getSelectionErr});
+         }
+         return res.status(201).json(results);
+      });
    });
 }

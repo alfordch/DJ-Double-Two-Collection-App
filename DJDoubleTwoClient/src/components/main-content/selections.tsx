@@ -16,6 +16,8 @@ import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context
 import SelectionResult from "@/components/main-content/search-results/selection-result"
 
 export default function Selections() {
+   // Get user information
+   const { userLoggedIn } = useGlobalAppState()
    const [results, setResults] = useState<any[]>([])
    const [error, setError] = useState("")
 
@@ -25,13 +27,21 @@ export default function Selections() {
       }
       try {
          let res
-         const body: any = {}
+         
+         let userID = userLoggedIn.userID
+         let selectionName = 'body'
+         const body: any = { userID, selectionName}
+
          if (query === '__new__') {
             res = await fetch('/selections/createSelection', {
                method: "POST",
-               headers: { "Content-Type": "application/json" }
+               headers: { "Content-Type": "application/json" },
+               body: JSON.stringify(body)
             })
          }
+
+         const data = await res?.json()
+         setResults(data)
       }
       catch (err) {
          console.error(err)
@@ -42,7 +52,7 @@ export default function Selections() {
       <div className="flex flex-col px-4">
          <div className="flex items-center">
             <MainHeader headertext="My Selections" />
-            <AppInput placeholder="My Selections..." buttonLabel="Search" />
+            <AppInput placeholder="My Selections..." buttonLabel="Search" onSubmit={handleSubmit}/>
          </div>
 
          <Separator orientation="horizontal" className="w-full mb-4" />
