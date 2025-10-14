@@ -14,6 +14,7 @@ import {
 import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
 import SelectionResult from "@/components/main-content/search-results/selection-result"
+import EmptySelection from "@/components/main-content/selections/empty-selections"
 
 export default function Selections() {
    // Get user information
@@ -48,14 +49,19 @@ export default function Selections() {
          setError("Error Encountered In Call To thedungeon0000 API, Please Try Again Later")
       }
    }
+   
    return (
-      <div className="flex flex-col px-4">
+      <div className="flex flex-col px-5">
          <div className="flex items-center">
             <MainHeader headertext="My Selections" />
             <AppInput placeholder="My Selections..." buttonLabel="Search" onSubmit={handleSubmit}/>
          </div>
 
          <Separator orientation="horizontal" className="w-full mb-4" />
+         
+         <div className="flex flex-col ml-4">
+            {results.length === 0 && <EmptySelection />}
+         </div>
       </div>
    )
 }

@@ -9,7 +9,7 @@ import { GlobalAppProvider } from './app-context/app-context'
 import Artists from "@/components/main-content/artists"
 import Tracks from "@/components/main-content/tracks"
 import Items from "@/components/main-content/items"
-import Selections from '@/components/main-content/selections'
+import Selections from '@/components/main-content/selections/selections'
 import LoginPage from '@/components/login-page'
 
 export default function App() {

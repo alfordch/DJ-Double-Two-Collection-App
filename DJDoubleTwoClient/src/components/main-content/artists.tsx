@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { MicVocal } from "lucide-react"
 import { AppInput } from "@/components/input/app-input"
 import { MainHeader } from "@/components/main-header"
 import { Separator } from "@/components/ui/separator"
@@ -14,6 +15,7 @@ import {
 
 // Result import
 import ArtistResult from "@/components/main-content/search-results/artist-result/artists-result"
+import EmptySearch from "@/components/main-content/search-results/empty-results"
 
 export default function Artists() {
    const [results, setResults] = useState<any[]>([])
@@ -112,7 +114,7 @@ export default function Artists() {
    }
 
    return (
-      <div className="flex flex-col px-4">
+      <div className="flex flex-col px-5">
       {/* Page Header: Header + Search Input on the same row */}
          <div className="flex items-center">
             <MainHeader headertext="Artists" />
@@ -144,7 +146,8 @@ export default function Artists() {
                </div>
                ))}
 
-            {!searched && <p className="text-muted-foreground">No results yet...</p>}
+            {/* {!searched && <p className="text-muted-foreground">No results yet...</p>} */}
+            {!searched && <EmptySearch emptyText="No results yet..." Icon={MicVocal} searchType="Artists" />}
             
             {!loading && searched && totalPages == 1 && 
                <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
