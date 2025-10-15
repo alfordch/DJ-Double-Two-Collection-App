@@ -36,11 +36,13 @@ export default function Artists() {
       if (!query) {
          return
       }
+
+      let res
+      
       try {
          setLoading(true)
          setSearched(true)
          setError("")
-         let res
       
          // Check for shuffle button click
          if (query === '__shuffle__') {
@@ -78,8 +80,20 @@ export default function Artists() {
          setResultsPages(tempSlices)
       } 
       catch (err) {
-         console.error(err)
-         setError("Error Encountered In Call To thedungeon0000 API, Please Try Again Later")
+         let errorMessage = "Error Encountered In Call To thedungeon0000 API, Please Try Again Later"
+
+         if (res) {
+            errorMessage = `${res.status}: ${res.statusText}`
+         }
+
+         /* console.error(err) */
+         setError(errorMessage)
+         setResults([])
+         setCurrentPage(0)
+         setTotalPages(0)
+         setResultsLength(0)
+         setCurrentPaginationList([])
+         setResultsPages([])
       } 
       finally {
          setLoading(false)
@@ -131,13 +145,19 @@ export default function Artists() {
                <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} artists found</p>
             )}
             
-            {loading && <p className="text-muted-foreground">Loading...</p>}
+            {/* {loading && <p className="text-muted-foreground">Loading...</p>} */}
+            {loading && 
+               <EmptySearch Icon={MicVocal} searchType="Artists" loading={true} />
+            }
             
-            {error && <p className="text-red-500">{error}</p>}
+            {/* {error && <p className="text-red-500">{error}</p>} */}
+            {error && 
+               <EmptySearch Icon={MicVocal} searchType="Artists" error={error} />
+            }
 
-            {!loading && !error && results.length === 0 && searched && (
-               <p className="text-muted-foreground">No results found</p>
-            )}
+            {!loading && !error && results.length === 0 && searched && 
+               <EmptySearch Icon={MicVocal} searchType="Artists" noneFound={true}/>
+            }
 
             {!loading && searched && results.length !== 0 && 
                resultsPages[currentPage].map((artist: any, idx: any) => (
@@ -147,7 +167,7 @@ export default function Artists() {
                ))}
 
             {/* {!searched && <p className="text-muted-foreground">No results yet...</p>} */}
-            {!searched && <EmptySearch emptyText="No results yet..." Icon={MicVocal} searchType="Artists" />}
+            {!searched && <EmptySearch Icon={MicVocal} searchType="Artists" />}
             
             {!loading && searched && totalPages == 1 && 
                <Separator orientation="horizontal" className="w-full mb-4 mt-2" />

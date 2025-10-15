@@ -1,6 +1,5 @@
-import { ListMusic, LucideIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
+import { LucideIcon } from "lucide-react"
+import { Spinner } from "@/components/ui/spinner"
 import {
    Empty,
    EmptyContent,
@@ -10,23 +9,49 @@ import {
    EmptyTitle,
 } from "@/components/ui/empty"
 
-export default function EmptySearch({emptyText, Icon, searchType} : {emptyText: string, Icon: LucideIcon, searchType: string}) {
+export default function EmptySearch({Icon, searchType, noneFound, loading, error} : { Icon: LucideIcon, searchType: string, noneFound?: boolean, loading?: boolean, error?:string}) {
    return (
-      <Empty className="from-muted/50 to-background h-full bg-gradient-to-b from-30%">
+      <Empty className="from-muted/30 to-background h-full bg-gradient-to-b from-30%">
          <EmptyHeader>
             <EmptyMedia variant="icon">
-               <Icon />
+               {error ? 
+                  <Icon className="text-red-500"/>
+               :
+                  <Icon />
+               }
             </EmptyMedia>
-            <EmptyTitle>{emptyText}</EmptyTitle>
+            <EmptyTitle>
+               {!noneFound && !loading && !error &&
+                  <span>No {searchType} yet...</span>
+               }
+               
+               {noneFound &&
+                  <span>No {searchType} found...</span>
+               }
+
+               {loading &&
+                  <div className="flex items-center gap-2"><Spinner />  Searching for {searchType}</div>
+               }
+               
+               {error &&
+                  <p className="text-red-500">Error searching for {searchType}</p>
+               }
+            </EmptyTitle>
             <EmptyDescription>
-               Use the bar above to search for {searchType}
+               {noneFound && 
+                  <span>Adjust your search in the bar above to find more {searchType}</span>
+               }
+
+               {error &&
+                  <span className="text-red-500">{error}</span>
+               }
+
+               {!noneFound && !loading && !error &&
+                  <span>Use the search bar above to find {searchType}</span>
+               }
             </EmptyDescription>
          </EmptyHeader>
-         {/* <EmptyContent>
-            <div className="flex gap-2">
-               <Button className="cursor-pointer">Create Selection</Button>
-            </div>
-         </EmptyContent> */}
+         {/* <div className='h-50'></div> */}
       </Empty>
    )
 }
