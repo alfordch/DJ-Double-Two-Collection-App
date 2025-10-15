@@ -12,7 +12,7 @@ import {
 
 export default function EmptySelection() {
    return (
-      <Empty className="from-muted/50 to-background h-full bg-gradient-to-b from-30%">
+      <Empty className="from-muted/30 to-background h-full bg-gradient-to-b from-30%">
          <EmptyHeader>
             <EmptyMedia variant="icon">
                <ListMusic />
