@@ -21,7 +21,7 @@ export default function TrackResult({ track }: { track: any }) {
             <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                {/* Check for db track that does not have an image */}
                {track.ItemCoverImage !== null ?
-                  <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg"/>
+                  <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg object-cover"/>
                :
                   <Music className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground cursor-pointer" />
                }
