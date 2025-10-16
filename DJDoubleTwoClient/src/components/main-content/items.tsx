@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Disc, Disc3 } from "lucide-react"
+import { Disc3 } from "lucide-react"
 import { AppInput } from "@/components/input/app-input"
 import { MainHeader } from "@/components/main-header"
 import { Separator } from "@/components/ui/separator"
@@ -161,9 +161,9 @@ export default function Items() {
 
             {!loading && searched && results.length !== 0 && 
                resultsPages[currentPage].map((item: any, idx: any) => (
-               <div key={idx} className="mb-2">
-                  <ItemResult item={item} key={idx}/>
-               </div>
+                  <div key={idx} className="mb-2">
+                     <ItemResult item={item} key={idx}/>
+                  </div>
                ))}
 
             {/* {!searched && <p className="text-muted-foreground">No results yet...</p>} */}

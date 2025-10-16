@@ -7,7 +7,7 @@ const getSelectionsQuery = `
       us.selectionName,
       us.selectionID,
       us.trackCount,
-      us.selectionUser,
+      us.selectionUser
    FROM 
       UserSelections us
    WHERE 
@@ -21,7 +21,7 @@ const searchSelectionByNameQuery = `
       us.selectionName,
       us.selectionID,
       us.trackCount,
-      us.selectionUser,
+      us.selectionUser
    FROM 
       UserSelections us
    WHERE 
@@ -38,7 +38,7 @@ const getRandomSelectionQuery = `
       us.selectionName,
       us.selectionID,
       us.trackCount,
-      us.selectionUser,
+      us.selectionUser
    FROM 
       UserSelections us
    WHERE 
