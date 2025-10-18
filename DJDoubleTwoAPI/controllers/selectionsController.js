@@ -12,6 +12,7 @@ const getSelectionsQuery = `
       UserSelections us
    WHERE 
       us.selectionUser = UUID_TO_BIN(?)
+      AND us.activeSelection = TRUE
    ORDER BY
       us.selectionName asc;
 `
@@ -27,6 +28,7 @@ const searchSelectionByNameQuery = `
    WHERE 
       us.selectionUser = UUID_TO_BIN(?)
       AND us.selectionName LIKE ?
+      AND us.activeSelection = TRUE
    ORDER BY
       us.selectionName asc
    LIMIT
@@ -43,10 +45,22 @@ const getRandomSelectionQuery = `
       UserSelections us
    WHERE 
       us.selectionUser = UUID_TO_BIN(?)
+      AND us.activeSelection = TRUE
    ORDER BY
       RAND()
    LIMIT
       1;
+`
+
+const inactivateSelectionQuery = `
+   UPDATE
+      UserSelections us
+   SET
+      us.activeSelection = FALSE
+   WHERE
+      us.selectionUser = UUID_TO_BIN(?)
+      AND us.selectionID = ?
+      AND us.activeSelection = TRUE;
 `
 
 exports.getSelections = (req, res) => {
@@ -59,7 +73,18 @@ exports.getSelections = (req, res) => {
 
          return res.status(500).json({ error: 'Search failed' });
       }
-      res.json(results);
+      //res.json(results);
+      //return res.json(results);
+
+      const formattedSelections = results.map(row => {
+         return {
+            ...row,
+            selectionID: row.selectionID?.toString("hex") || null,
+            selectionUser: row.selectionUser?.toString("hex") || null
+         };
+      });
+
+      return res.json(formattedSelections);
    });
 };
 
@@ -73,7 +98,7 @@ exports.searchSelectionByName = (req, res) => {
 
          return res.status(500).json({ error: 'Search failed' });
       }
-      res.json(results);
+      return res.json(results);
    });
 };
 
@@ -87,7 +112,7 @@ exports.getRandSelection = (req, res) => {
 
          return res.status(500).json({ error: 'Search failed' });
       }
-      res.json(results);
+      return res.json(results);
    });
 };
 
@@ -119,6 +144,7 @@ exports.createSelection = (req, res) => {
          WHERE 
             selectionUser = UUID_TO_BIN(?)
             AND selectionName = ?
+            AND us.activeSelection = TRUE
          LIMIT
             1;
       `
@@ -129,5 +155,17 @@ exports.createSelection = (req, res) => {
          }
          return res.status(201).json(results);
       });
+   });
+}
+
+exports.deleteSelection = (req, res) => {
+   const parameters = req.body;
+   const values = [ parameters['userID'], parameters['selectionID'] ];
+
+   db.query(inactivateSelectionQuery, values, (err, results) => {
+      if (err) {
+         console.error('Selection deletion error: ', err);
+         return res.status(500).json({ error: 'Selection deletion failed' });
+      }
    });
 }

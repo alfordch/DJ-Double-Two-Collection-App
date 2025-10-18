@@ -11,6 +11,16 @@ import {
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
 
 export default function SelectionResult({ selection }: { selection: any}) {
+   /* const handleDelete = async() => {
+      try {
+         let res
+         const body: any = [selection.selectionID, selection.selectionuser]; 
+      }
+      catch (err) {
+
+      }
+   } */
+
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
          <div className="flex items-center gap-3">
