@@ -35,7 +35,7 @@ export default function Selections() {
          
          let userID = userLoggedIn.userID
          let selectionName = 'body'
-         const body: any = { userID, selectionName}
+         const body: any = { userID, selectionName }
 
          if (query === '__new__') {
             res = await fetch('/selections/createSelection', {

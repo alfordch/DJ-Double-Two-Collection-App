@@ -10,5 +10,7 @@ router.get('/searchSelectionByName', selectionsController.searchSelectionByName)
 // POST /selections
 router.post('/createSelection', selectionsController.createSelection);
 
+// PUT /selections
+router.put('/deleteSelection', selectionsController.deleteSelection);
 
 module.exports = router;
