@@ -1,3 +1,4 @@
+const { format } = require('path');
 const db = require('../config/config');
 
 // Start with logic for fetching selections
@@ -56,10 +57,10 @@ const inactivateSelectionQuery = `
    UPDATE
       UserSelections us
    SET
-      us.activeSelection = FALSE
+      us.activeSelection = NULL
    WHERE
-      us.selectionUser = UUID_TO_BIN(?)
-      AND us.selectionID = ?
+      us.selectionID = UUID_TO_BIN(?)
+      AND us.selectionUser = UUID_TO_BIN(?)
       AND us.activeSelection = TRUE;
 `
 
@@ -120,14 +121,14 @@ exports.getRandSelection = (req, res) => {
 
 const createSelectionQuery = `
    INSERT INTO
-      UserSelections (selectionUser, selectionName)
+      UserSelections (selectionName, selectionUser)
    VALUES
-      (UUID_TO_BIN(?), ?);
+      (?, UUID_TO_BIN(?));
 `
 
 exports.createSelection = (req, res) => {
    const parameters = req.body;
-   const values = [ parameters['userID'], parameters['selectionName'] ];
+   const values = [ parameters['selectionName'], parameters['selectionUser'] ];
 
    db.query(createSelectionQuery, values, (err, results) => {
       if (err) {
@@ -142,30 +143,43 @@ exports.createSelection = (req, res) => {
          FROM 
             UserSelections
          WHERE 
-            selectionUser = UUID_TO_BIN(?)
-            AND selectionName = ?
-            AND us.activeSelection = TRUE
-         LIMIT
-            1;
+            selectionName = ?
+            AND selectionUser = UUID_TO_BIN(?)
+            AND activeSelection = TRUE
+         ;
       `
 
       db.query(getSelectionQuery, values, (getSelectionErr, results) => {
          if (getSelectionErr) {
-            return res.status(201).json({message: "Selection created. Issue found with getting selection information", getSelectionErr});
+
+            return res.status(202).json({message: "Selection created. Issue found with getting selection information", getSelectionErr});
          }
-         return res.status(201).json(results);
+
+         const formattedSelections = results.map(row => {
+            return {
+               ...row,
+               selectionID: row.selectionID?.toString("hex") || null,
+               selectionUser: row.selectionUser?.toString("hex") || null
+            };
+         });
+         
+         return res.status(201).json(formattedSelections);
       });
    });
 }
 
 exports.deleteSelection = (req, res) => {
    const parameters = req.body;
-   const values = [ parameters['userID'], parameters['selectionID'] ];
+   const values = [ parameters['selectionID'], parameters['selectionUser'] ];
 
    db.query(inactivateSelectionQuery, values, (err, results) => {
       if (err) {
          console.error('Selection deletion error: ', err);
          return res.status(500).json({ error: 'Selection deletion failed' });
       }
+      return res.status(201).json({
+         message: 'Selection successfully inactivated',
+         affectedRows: results.affectedRows
+      });
    });
 }

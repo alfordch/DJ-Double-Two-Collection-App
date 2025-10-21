@@ -35,7 +35,7 @@ export default function Selections() {
          
          let userID = userLoggedIn.userID
          let selectionName = 'body'
-         const body: any = { userID, selectionName }
+         const body: any = { selectionName: selectionName, selectionUser: userID }
 
          if (query === '__new__') {
             res = await fetch('/selections/createSelection', {
@@ -45,7 +45,11 @@ export default function Selections() {
             })
          }
 
-         const data = await res?.json()
+         else {
+            res = await fetch(`/items/randItems`)
+         }
+
+         const data = await res.json()
          setResults(data)
       }
       catch (err) {
@@ -98,10 +102,12 @@ export default function Selections() {
             {/* No selections created, and not searching for any (and no error)*/}
             {results.length === 0 && !loading && !error && <EmptySelection />}
 
+            {/* Selections exist, but search yields none */}
+            
             {!loading && results.length !== 0 &&
                results.map((selection: any, idx: any) => (
                   <div key={idx} className="mb-2">
-                     <SelectionResult selection={selection} />
+                     <SelectionResult selection={selection} key={idx}/>
                   </div>
                ))
             }
