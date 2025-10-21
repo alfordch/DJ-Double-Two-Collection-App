@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { ListMusic, Ellipsis, Plus, Share, Trash2, PencilLine } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -7,19 +8,22 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup
 } from "@/components/ui/dropdown-menu"
-import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu"
+import {
+   Dialog,
+   DialogTrigger
+} from "@/components/ui/dialog"
+
+import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
+import DeleteSelectionResult from "@/components/main-content/selections/delete-selection"
 
 export default function SelectionResult({ selection }: { selection: any}) {
-   /* const handleDelete = async() => {
-      try {
-         let res
-         const body: any = [selection.selectionID, selection.selectionuser]; 
-      }
-      catch (err) {
-
-      }
-   } */
+   const { userLoggedIn } = useGlobalAppState()
+   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+   const [showAddDialog, setShowAddDialog] = useState(false)
+   const [showRenameDialog, setShowRenameDialog] = useState(false)
+   const [showShareDialog, setShowShareDialog] = useState(false)
 
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
@@ -40,14 +44,20 @@ export default function SelectionResult({ selection }: { selection: any}) {
                </DropdownMenuTrigger>
                <DropdownMenuContent className="w-40" align="end">
                   <DropdownMenuGroup>
-                     <DropdownMenuItem className="cursor-pointer"><Plus />Add New Tracks</DropdownMenuItem>
-                     <DropdownMenuItem className="cursor-pointer"><PencilLine />Rename</DropdownMenuItem>
-                     <DropdownMenuItem className="cursor-pointer"><Share />Share</DropdownMenuItem>
+                     <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowAddDialog(true)}><Plus />Add New Tracks</DropdownMenuItem>
+                     <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowRenameDialog(true)}><PencilLine />Rename</DropdownMenuItem>
+                     <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowShareDialog(true)}><Share />Share</DropdownMenuItem>
                      <DropdownMenuSeparator />
-                     <DropdownMenuItem className="text-red-500 font-bold cursor-pointer"><Trash2 className="text-red-500" />Delete</DropdownMenuItem>
+                     <DropdownMenuItem className="text-red-500 font-bold cursor-pointer" onSelect={() => setShowDeleteDialog(true)}>
+                        <Trash2 className="text-red-500" />
+                        Delete
+                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                </DropdownMenuContent>
             </DropdownMenu>
+            <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+                  <DeleteSelectionResult selection={selection} />
+            </Dialog>
          </div>
       </div>
    )
