@@ -50,7 +50,69 @@ const getRandomSelectionQuery = `
    ORDER BY
       RAND()
    LIMIT
-      1;
+   1;
+   `
+
+exports.getSelections = (req, res) => {
+   const searchTerm = `${req.query.q || ''}`;
+   const values = [ searchTerm ];
+   
+   db.query(getSelectionsQuery, values, (err, results) => {
+      if (err) {
+         console.error('Search query error:', err);
+         
+         return res.status(500).json({ error: 'Search failed' });
+      }
+      //res.json(results);
+      //return res.json(results);
+      
+      const formattedSelections = results.map(row => {
+         return {
+            ...row,
+            selectionID: row.selectionID?.toString("hex") || null,
+            selectionUser: row.selectionUser?.toString("hex") || null
+         };
+      });
+      
+      return res.json(formattedSelections);
+   });
+};
+   
+exports.searchSelectionByName = (req, res) => {
+   const searchTerm = `%${req.query.q || ''}%`;
+   const values = [ searchTerm, searchTerm ];
+   
+   db.query(searchSelectionByNameQuery, values, (err, results) => {
+      if (err) {
+         console.error('Search query error:', err);
+         
+         return res.status(500).json({ error: 'Search failed' });
+      }
+      return res.json(results);
+   });
+};
+
+exports.getRandSelection = (req, res) => {
+   const searchTerm = `${req.query.q || ''}`;
+   const values = [ searchTerm ];
+   
+   db.query(getRandomSelectionQuery, values, (err, results) => {
+      if (err) {
+         console.error('Search query error:', err);
+         
+         return res.status(500).json({ error: 'Search failed' });
+      }
+      return res.json(results);
+   });
+};
+   
+// Now get to creating, deleting, and editing selections
+
+const createSelectionQuery = `
+   INSERT INTO
+   UserSelections (selectionName, selectionUser)
+   VALUES
+   (?, UUID_TO_BIN(?));
 `
 
 const inactivateSelectionQuery = `
@@ -64,18 +126,45 @@ const inactivateSelectionQuery = `
       AND us.activeSelection = TRUE;
 `
 
-exports.getSelections = (req, res) => {
-   const searchTerm = `${req.query.q || ''}`;
-   const values = [ searchTerm ];
+const renameSelectionQuery = `
+   UPDATE
+      UserSelections us
+   SET
+      us.selectionName = ?
+   WHERE
+      us.selectionID = UUID_TO_BIN(?)
+      AND us.selectionUser = UUID_TO_BIN(?)
+      AND us.activeSelection = TRUE;
+`
 
-   db.query(getSelectionsQuery, values, (err, results) => {
+exports.createSelection = (req, res) => {
+   const parameters = req.body;
+   const values = [ parameters['selectionName'], parameters['selectionUser'] ];
+   
+   db.query(createSelectionQuery, values, (err, results) => {
       if (err) {
-         console.error('Search query error:', err);
-
-         return res.status(500).json({ error: 'Search failed' });
+         console.error('Selection creation error: ', err);
+         return res.status(500).json({ error: 'Selection creation failed' });
       }
-      //res.json(results);
-      //return res.json(results);
+      
+      // Check insert status (if successful)
+      const getSelectionQuery = `
+      SELECT
+         BIN_TO_UUID(selectionUser), BIN_TO_UUID(selectionID), selectionName, createdAt
+      FROM 
+         UserSelections
+      WHERE 
+         selectionName = ?
+         AND selectionUser = UUID_TO_BIN(?)
+         AND activeSelection = TRUE
+      ;
+   `
+
+   db.query(getSelectionQuery, values, (getSelectionErr, results) => {
+      if (getSelectionErr) {
+
+         return res.status(202).json({message: "Selection created. Issue found with getting selection information", getSelectionErr});
+      }
 
       const formattedSelections = results.map(row => {
          return {
@@ -84,88 +173,10 @@ exports.getSelections = (req, res) => {
             selectionUser: row.selectionUser?.toString("hex") || null
          };
       });
-
-      return res.json(formattedSelections);
+      
+      return res.status(201).json(formattedSelections);
    });
-};
-
-exports.searchSelectionByName = (req, res) => {
-   const searchTerm = `%${req.query.q || ''}%`;
-   const values = [ searchTerm, searchTerm ];
-
-   db.query(searchSelectionByNameQuery, values, (err, results) => {
-      if (err) {
-         console.error('Search query error:', err);
-
-         return res.status(500).json({ error: 'Search failed' });
-      }
-      return res.json(results);
-   });
-};
-
-exports.getRandSelection = (req, res) => {
-   const searchTerm = `${req.query.q || ''}`;
-   const values = [ searchTerm ];
-
-   db.query(getRandomSelectionQuery, values, (err, results) => {
-      if (err) {
-         console.error('Search query error:', err);
-
-         return res.status(500).json({ error: 'Search failed' });
-      }
-      return res.json(results);
-   });
-};
-
-// Now get to creating, deleting, and editing selections
-
-const createSelectionQuery = `
-   INSERT INTO
-      UserSelections (selectionName, selectionUser)
-   VALUES
-      (?, UUID_TO_BIN(?));
-`
-
-exports.createSelection = (req, res) => {
-   const parameters = req.body;
-   const values = [ parameters['selectionName'], parameters['selectionUser'] ];
-
-   db.query(createSelectionQuery, values, (err, results) => {
-      if (err) {
-         console.error('Selection creation error: ', err);
-         return res.status(500).json({ error: 'Selection creation failed' });
-      }
-
-      // Check insert status (if successful)
-      const getSelectionQuery = `
-         SELECT
-            BIN_TO_UUID(selectionUser), BIN_TO_UUID(selectionID), selectionName, createdAt
-         FROM 
-            UserSelections
-         WHERE 
-            selectionName = ?
-            AND selectionUser = UUID_TO_BIN(?)
-            AND activeSelection = TRUE
-         ;
-      `
-
-      db.query(getSelectionQuery, values, (getSelectionErr, results) => {
-         if (getSelectionErr) {
-
-            return res.status(202).json({message: "Selection created. Issue found with getting selection information", getSelectionErr});
-         }
-
-         const formattedSelections = results.map(row => {
-            return {
-               ...row,
-               selectionID: row.selectionID?.toString("hex") || null,
-               selectionUser: row.selectionUser?.toString("hex") || null
-            };
-         });
-         
-         return res.status(201).json(formattedSelections);
-      });
-   });
+});
 }
 
 exports.deleteSelection = (req, res) => {
@@ -181,5 +192,21 @@ exports.deleteSelection = (req, res) => {
          message: 'Selection successfully inactivated',
          affectedRows: results.affectedRows
       });
+   });
+}
+
+exports.renameSelection = (req, res) => {
+   const parameters = req.body;
+   const values = [ parameters['newSelectionName'], parameters['selectionID'], parameters['selectionUser'] ];
+
+   db.query(renameSelectionQuery, values, (err, results) => {
+      if (err) {
+         console.error('Selection renaming error: ', err);
+         return res.status(500).json({ error: 'Selection renaming failed' });
+      }
+      return res.status(201).json({
+         message: 'Selection successfully renamed',
+         affectedRows: results.affectedRows
+      })
    });
 }
