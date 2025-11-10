@@ -17,6 +17,7 @@ import {
 
 import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 import DeleteSelectionResult from "@/components/main-content/selections/delete-selection"
+import RenameSelectionResult from "@/components/main-content/selections/rename-selection"
 
 export default function SelectionResult({ selection }: { selection: any}) {
    const { userLoggedIn } = useGlobalAppState()
@@ -46,7 +47,7 @@ export default function SelectionResult({ selection }: { selection: any}) {
                   <DropdownMenuGroup>
                      <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowAddDialog(true)}><Plus />Add New Tracks</DropdownMenuItem>
                      <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowRenameDialog(true)}><PencilLine />Rename</DropdownMenuItem>
-                     <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowShareDialog(true)}><Share />Share</DropdownMenuItem>
+                     {/* <DropdownMenuItem className="cursor-pointer" onSelect={() => setShowShareDialog(true)}><Share />Share</DropdownMenuItem> */}
                      <DropdownMenuSeparator />
                      <DropdownMenuItem className="text-red-500 font-bold cursor-pointer" onSelect={() => setShowDeleteDialog(true)}>
                         <Trash2 className="text-red-500" />
@@ -56,7 +57,10 @@ export default function SelectionResult({ selection }: { selection: any}) {
                </DropdownMenuContent>
             </DropdownMenu>
             <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-                  <DeleteSelectionResult selection={selection} />
+               <DeleteSelectionResult selection={selection} />
+            </Dialog>
+            <Dialog open={showRenameDialog} onOpenChange={setShowRenameDialog}>
+               <RenameSelectionResult selection={selection} />
             </Dialog>
          </div>
       </div>

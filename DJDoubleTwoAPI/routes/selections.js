@@ -12,5 +12,6 @@ router.post('/createSelection', selectionsController.createSelection);
 
 // PUT /selections
 router.put('/deleteSelection', selectionsController.deleteSelection);
+router.put('/renameSelection', selectionsController.renameSelection);
 
 module.exports = router;
