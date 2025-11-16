@@ -89,6 +89,10 @@ export default function Selections() {
       firstPass()
    }
 
+   const refresh = () => {
+      firstPass()
+   }
+
    return (
       <div className="flex flex-col px-5">
          <div className="flex items-center">
@@ -98,7 +102,7 @@ export default function Selections() {
 
          <Separator orientation="horizontal" className="w-full mb-4" />
          
-         <div className="flex flex-col ml-4">
+         <div className="flex flex-col ml-4 mr-4">
             {/* No selections created, and not searching for any (and no error)*/}
             {results.length === 0 && !loading && !error && <EmptySelection />}
 
@@ -107,7 +111,7 @@ export default function Selections() {
             {!loading && results.length !== 0 &&
                results.map((selection: any, idx: any) => (
                   <div key={idx} className="mb-2">
-                     <SelectionResult selection={selection} key={idx}/>
+                     <SelectionResult selection={selection} onRefresh={refresh} key={idx}/>
                   </div>
                ))
             }

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ListMusic, Ellipsis, Plus, Share, Trash2, PencilLine } from "lucide-react"
+import { ListMusic, Ellipsis, Plus, Share, Trash2, PencilLine, RefreshCcw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -19,8 +19,9 @@ import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context
 import DeleteSelectionResult from "@/components/main-content/selections/delete-selection"
 import RenameSelectionResult from "@/components/main-content/selections/rename-selection"
 
-export default function SelectionResult({ selection }: { selection: any}) {
+export default function SelectionResult({ selection, onRefresh }: { selection: any, onRefresh: any}) {
    const { userLoggedIn } = useGlobalAppState()
+   const [reload, setReload] = useState(false)
    const [showDeleteDialog, setShowDeleteDialog] = useState(false)
    const [showAddDialog, setShowAddDialog] = useState(false)
    const [showRenameDialog, setShowRenameDialog] = useState(false)
@@ -57,10 +58,10 @@ export default function SelectionResult({ selection }: { selection: any}) {
                </DropdownMenuContent>
             </DropdownMenu>
             <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-               <DeleteSelectionResult selection={selection} />
+               <DeleteSelectionResult selection={selection} onRefresh={onRefresh} />
             </Dialog>
             <Dialog open={showRenameDialog} onOpenChange={setShowRenameDialog}>
-               <RenameSelectionResult selection={selection} />
+               <RenameSelectionResult selection={selection} onRefresh={onRefresh} />
             </Dialog>
          </div>
       </div>

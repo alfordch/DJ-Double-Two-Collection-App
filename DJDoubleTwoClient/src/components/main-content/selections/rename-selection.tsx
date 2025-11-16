@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 
-export default function RenameSelectionResult({ selection }: { selection: any }) {
+export default function RenameSelectionResult({ selection, onRefresh }: { selection: any, onRefresh: any }) {
    const [error, setError] = useState("")
    const [newName, setNewName] = useState("")
 
@@ -37,6 +37,7 @@ export default function RenameSelectionResult({ selection }: { selection: any })
       catch (err) {
          setError("Error Encountered In Call To thedungeon0000 API, Please Try Again")
       }
+      onRefresh()
    }
 
    return (

@@ -128,7 +128,7 @@ const itemsByArtistQuery = `
    (SELECT 
       i.ItemID,
       i.ItemName,
-      GROUP_CONCAT(DISTINCT a.artistname ORDER BY a.artistname SEPARATOR ', ') AS ItemArtists,
+      GROUP_CONCAT(DISTINCT a.ArtistName ORDER BY a.ArtistName SEPARATOR ', ') AS ItemArtists,
       i.ItemFormat,
       DAY(i.ItemReleaseDate) AS ItemReleaseDay,
       MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
@@ -136,15 +136,19 @@ const itemsByArtistQuery = `
       i.ItemLabel,
       i.ItemTrackCount,
       i.ItemCoverImage
-   FROM
-      ItemArtists ia
-      INNER JOIN Items i ON ia.ItemID = i.ItemID
-      INNER JOIN Artists a ON a.ArtistID = ia.ArtistID
-      LEFT JOIN GroupMembers gm ON gm.GroupID = a.ArtistID OR gm.MemberID = a.ArtistID
-      INNER JOIN Tracks t ON t.TrackItem = i.ItemID
-   WHERE
-      gm.MemberID = ? OR gm.GroupID = ?
-   GROUP BY
+   FROM Items i
+   JOIN ItemArtists ia ON ia.ItemID = i.ItemID
+   JOIN Artists a      ON a.ArtistID = ia.ArtistID
+   WHERE EXISTS (
+      SELECT 1
+      FROM ItemArtists ia2
+      JOIN GroupMembers gm 
+            ON gm.GroupID = ia2.ArtistID 
+            OR gm.MemberID = ia2.ArtistID
+      WHERE ia2.ItemID = i.ItemID
+         AND (gm.GroupID = ? OR gm.MemberID = ?)
+      )
+   GROUP BY 
       i.ItemID)
    ORDER BY
       ItemID ASC;
