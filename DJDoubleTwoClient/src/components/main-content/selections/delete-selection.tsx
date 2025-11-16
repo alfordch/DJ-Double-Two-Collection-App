@@ -10,7 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 
-export default function DeleteSelectionResult({ selection }: { selection: any }) {
+export default function DeleteSelectionResult({ selection, onRefresh }: { selection: any, onRefresh: any }) {
    const [error, setError] = useState("")
 
    const handleDelete = async() => {
@@ -33,6 +33,7 @@ export default function DeleteSelectionResult({ selection }: { selection: any })
       catch (err) {
          setError("Error Encountered In Call To thedungeon0000 API, Please Try Again")
       }
+      onRefresh()
    }
 
    return (

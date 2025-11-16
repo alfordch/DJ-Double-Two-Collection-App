@@ -139,7 +139,7 @@ export default function Items() {
          <Separator orientation="horizontal" className="w-full mb-4" />
 
          {/* Search Results */}
-         <div className="flex flex-col ml-4">
+         <div className="flex flex-col ml-4 mr-4">
 
             {!loading && resultsLength !== 0 && searched && (
                <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} items found</p>
