@@ -1,5 +1,3 @@
-/* import { ModeToggle } from "@/components/theme/mode-toggle" */
-
 import {
    SidebarHeader,
    SidebarMenu,

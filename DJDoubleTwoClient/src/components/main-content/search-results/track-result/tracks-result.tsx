@@ -1,19 +1,6 @@
-import { useGlobalAppState } from "@/app-context/app-context"
-import { Music, Plus } from "lucide-react"
-import {
-   Tooltip,
-   TooltipContent,
-   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import {
-   Dialog,
-   DialogTrigger
-} from "@/components/ui/dialog"
-
-import AddToSelectionContent from "@/components/main-content/search-results/track-result/add-to-selection"
+import { Music } from "lucide-react"
 
 export default function TrackResult({ track }: { track: any }) {
-   const { userLoggedIn } = useGlobalAppState()
 
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
@@ -25,25 +12,6 @@ export default function TrackResult({ track }: { track: any }) {
                :
                   <Music className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground cursor-pointer" />
                }
-
-               {/* Load overlay for adding track to selection if user is logged in */}
-               {userLoggedIn.userLoggedIn && (
-                  <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
-                     <Tooltip>
-                        <Dialog>
-                           <DialogTrigger>
-                              <TooltipTrigger asChild>
-                                 <Plus className={`w-15 h-15 ${userLoggedIn.userLoggedIn && 'cursor-pointer'}`}/>
-                              </TooltipTrigger>
-                           </DialogTrigger>
-                           <AddToSelectionContent track={track}/>
-                        </Dialog>
-                        <TooltipContent>
-                           Add to selection
-                        </TooltipContent>
-                     </Tooltip>
-                  </div>
-               )}
             </div>
             <div className="flex flex-col flex-1 min-w-0">
                <p className="font-bold leading-tight">{track.TrackName}</p>
