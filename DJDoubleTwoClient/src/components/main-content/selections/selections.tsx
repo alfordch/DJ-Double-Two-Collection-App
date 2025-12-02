@@ -25,7 +25,7 @@ export default function Selections() {
    const [firstPassed, setFirstPassed] = useState(false)
    const [searched, setSearched] = useState(false)
    const [error, setError] = useState("")
-
+   // Test comment
    const handleSubmit = async (query: string) => {
       if (!query) {
          return
