@@ -2,7 +2,6 @@ import { useState, useEffect }from "react"
 import { NavMain } from "@/components/sidebar/nav-main"
 import { AppSidebarHeader } from "@/components/sidebar/sidebar-header"
 import { AppSidebarUser } from "@/components/sidebar/sidebar-user"
-import { useGlobalAppState, globalAppInterface } from "@/app-context/app-context"
 
 import {
   Sidebar,
@@ -33,9 +32,8 @@ const data = {
 
 export function AppSidebar({...props }: any) {
   const [reload, setReload] = useState("");
-  const { userLoggedIn } = useGlobalAppState();
 
-  useEffect(() => {
+  /* useEffect(() => {
     // Handle showing the selections route and footer user
     if (userLoggedIn.userLoggedIn && data.navItems.length < 4) {
       data.navItems.push({ name: "My Selections", url: "/myselections", icon: LibraryBig });
@@ -44,7 +42,7 @@ export function AppSidebar({...props }: any) {
     if (!userLoggedIn && data.navItems.length == 4) {
       data.navItems.pop();
     }
-  }, [userLoggedIn]);
+  }, [userLoggedIn]); */
 
   return (
     <Sidebar variant="floating" collapsible="icon" className="transition-all duration-200" {...props}>
@@ -52,9 +50,9 @@ export function AppSidebar({...props }: any) {
       <SidebarContent>
         <NavMain navItems={data.navItems} />
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <AppSidebarUser />
-      </SidebarFooter>
+      </SidebarFooter> */}
     </Sidebar>
   )
 }

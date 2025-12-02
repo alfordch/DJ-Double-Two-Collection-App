@@ -37,11 +37,11 @@ export default function AddToSelectionContent({ track }: { track: any }) {
                   Pick which selection to add the track to:
                </DialogDescription>
 
-               {testSelections.list.map((selection: any, idx: any) => (
+               {/* {testSelections.list.map((selection: any, idx: any) => (
                   <div key={idx}>
                      <SelectionResult selection={selection} />
                   </div>
-               ))}
+               ))} */}
 
             </DialogHeader>
             <DialogFooter>

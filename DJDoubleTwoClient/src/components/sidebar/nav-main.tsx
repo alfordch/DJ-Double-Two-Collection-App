@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react"
-import { Link, Route, Routes, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import {
   SidebarGroup,
