@@ -11,28 +11,39 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 import TrackResult from "@/components/main-content/search-results/track-result/tracks-result"
+import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
 
 export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
     return (
         <div>
-            <DialogContent showCloseButton={false}>
+            <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl">
                 <DialogHeader>
-                    <DialogTitle>Tracks:</DialogTitle>
+                    {/* <DialogTitle>Tracks:</DialogTitle> */}
                     
-                    <DialogDescription>
+                    {/* <DialogDescription>
                         <span className="font-style: italic font-bold">{item.ItemName} by {item.ItemArtists} [{item.ItemLabel}, {item.ItemReleaseYear}]</span>
-                    </DialogDescription>
-                    
-                    <Separator orientation="horizontal"/>
+                    </DialogDescription> */}
 
-                    <ScrollArea className={`${results.length > 2 && 'h-100'} p-4`}>
-                        {!error ? <span>{results.length !== 0 &&
-                            results.map((track: any, idx: any) => (
-                                <div key={idx} className="mb-2">
-                                    <TrackResult track={track} key={idx}/>
-                                </div>
-                            ))
-                        }</span> : <div className="bg-muted p-3 rounded-md"><p className="text-red-500">{error}</p></div> }
+                    <div className="flex items-center gap-3">
+                        <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
+                            <img src={`/covers/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} className="w-45 h-45 rounded-lg drop-shadow-lg"/>
+                        </div>
+                        <div className="flex flex-col flex-1 min-w-0">
+                            <p className="font-bold leading-tight text-xl">{item.ItemName}</p>
+                            <p className="text-lg">{item.ItemArtists}</p>
+                            <p>{item.ItemLabel} · {item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</p>
+                            <p className="text-sm">{item.ItemTrackCount} tracks</p>
+                        </div>
+                        <div className="text-lg font-bold drop-shadow-lg">
+                            <p className="text-lg font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
+                        </div>
+                    </div>
+
+                    <Separator orientation="horizontal" className="mt-3 mb-2"/>
+                    
+                    <ScrollArea className={`${results.length > 2 && 'h-50'}`}>
+                    
+                        <ViewTracksTable results={results}></ViewTracksTable>
 
                         <ScrollBar className="cursor-pointer"/>
                     </ScrollArea>

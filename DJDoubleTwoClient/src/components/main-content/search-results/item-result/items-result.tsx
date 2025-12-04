@@ -38,7 +38,7 @@ export default function ItemResult({ item }: { item: any }) {
    }
       
    return (
-      <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
+      <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition cursor-pointer">
          <div className="flex items-center gap-3">
             <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                {item.ItemCoverImage !== null ?
@@ -49,11 +49,11 @@ export default function ItemResult({ item }: { item: any }) {
                <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
                   <Tooltip>
                      <Dialog>
-                        <DialogTrigger>
                            <TooltipTrigger asChild>
+                        <DialogTrigger asChild>
                               <Search className="w-15 h-15 cursor-pointer" onClick={handleViewTracks}/>
-                           </TooltipTrigger>
                         </DialogTrigger>
+                           </TooltipTrigger>
                         <ViewTracks item={item} results={results} error={error}/>
                      </Dialog>
                      <TooltipContent>
