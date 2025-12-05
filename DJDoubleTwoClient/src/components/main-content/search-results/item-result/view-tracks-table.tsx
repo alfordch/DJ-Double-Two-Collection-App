@@ -10,6 +10,10 @@ import {
 
 export default function ViewTracksTable({ results }: { results: any }) { 
     /* Check if any features exist, if not, set state to remove that column */
+    const hasFeatures = results.some(
+        (r: any) => r.TrackFeatures !== null && r.TrackFeatures !== undefined
+    );
+    
     return (
         <div>
             <Table>
@@ -18,7 +22,7 @@ export default function ViewTracksTable({ results }: { results: any }) {
                         <TableHead>Item Location</TableHead>
                         <TableHead>Title</TableHead>
                         <TableHead>Produced By</TableHead>
-                        <TableHead>Featuring</TableHead>
+                        { hasFeatures && <TableHead>Featuring</TableHead> }
                         <TableHead className="text-center">Track Length</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -28,7 +32,7 @@ export default function ViewTracksTable({ results }: { results: any }) {
                             <TableCell className="font-bold">{result.TrackItemLoc}</TableCell>
                             <TableCell>{result.TrackName}</TableCell>
                             <TableCell>{result.TrackProducers}</TableCell>
-                            <TableCell className="text-wrap">{result.TrackFeatures}</TableCell>
+                            { hasFeatures && <TableCell className="text-wrap">{result.TrackFeatures}</TableCell> }
                             <TableCell className="text-center">{result.TrackLength}</TableCell>
                         </TableRow>
                     )}
