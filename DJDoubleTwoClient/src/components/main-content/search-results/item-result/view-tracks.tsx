@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Root as VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import {
    DialogClose,
    DialogContent,
@@ -17,12 +18,16 @@ export default function ViewTracks({ item, results, error }: { item: any, result
     return (
         <div>
             <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl">
+                {/* Fix radix error with dialog title */}
+                <DialogTitle>
+                    <VisuallyHidden>Hidden dialog title</VisuallyHidden>
+                </DialogTitle>
+
                 <DialogHeader>
-                    {/* <DialogTitle>Tracks:</DialogTitle> */}
-                    
-                    {/* <DialogDescription>
-                        <span className="font-style: italic font-bold">{item.ItemName} by {item.ItemArtists} [{item.ItemLabel}, {item.ItemReleaseYear}]</span>
-                    </DialogDescription> */}
+                    {/* Fix radix error with dialog description */}
+                    <DialogDescription>
+                        <VisuallyHidden>Hiddne dialog description</VisuallyHidden>
+                    </DialogDescription>
 
                     <div className="flex items-center gap-3">
                         <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
@@ -42,10 +47,8 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                     <Separator orientation="horizontal" className="mt-3 mb-2"/>
                     
                     <ScrollArea className={`${results.length > 2 && 'h-50'}`}>
-                    
                         <ViewTracksTable results={results}></ViewTracksTable>
-
-                        <ScrollBar className="cursor-pointer"/>
+                        <ScrollBar className="cursor-pointer opacity-[.05]"/>
                     </ScrollArea>
 
                 </DialogHeader>
