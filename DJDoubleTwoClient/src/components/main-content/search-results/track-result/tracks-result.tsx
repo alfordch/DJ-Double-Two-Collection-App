@@ -1,16 +1,16 @@
-import { Music } from "lucide-react"
+import { useState } from "react"
 
 export default function TrackResult({ track }: { track: any }) {
+   const [imgError, setImgError] = useState(false)
 
    return (
       <div className="flex items-center justify-between p-3 rounded-md border shadow-sm hover:bg-muted transition">
          <div className="flex items-center gap-3">
             <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
-               {/* Check for db track that does not have an image */}
-               {track.ItemCoverImage !== null ?
-                  <img src={`/covers/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} className="w-25 h-25 rounded-lg drop-shadow-lg object-cover"/>
+               {!imgError ? 
+                  <img src={`/webGraphics/${track.TrackItem}/graphics/Cover.webp`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                :
-                  <Music className="w-10 h-10 bg-accent rounded-lg p-1 text-muted-foreground cursor-pointer" />
+                  <img src={`/fallbackGraphics/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                }
             </div>
             <div className="flex flex-col flex-1 min-w-0">
