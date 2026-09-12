@@ -34,6 +34,9 @@ app.use('/artists', artistRoutes);
 const itemsRoutes = require('./routes/items');
 app.use('/items', itemsRoutes);
 
+const webGraphicsRoutes = require('./routes/graphics');
+app.use('/graphics', webGraphicsRoutes);
+
 // Serve static files from client build
 app.use(express.static(path.join(__dirname, 'client-build')));
 

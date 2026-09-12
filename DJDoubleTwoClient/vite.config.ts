@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
         '/tracks': 'http://localhost:3000',
         '/items': 'http://localhost:3000',
         '/artists': 'http://localhost:3000',
+        '/graphics': 'http://localhost:3000'
       },
     },
     build: {

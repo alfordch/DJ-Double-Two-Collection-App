@@ -16,6 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 
 import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
+import ItemGraphicsCarousel from "@/components/main-content/search-results/item-result/items-graphics-carousel"
 
 export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
    const [imgError, setImgError] = useState(false)
@@ -23,6 +24,7 @@ export default function ViewTracks({ item, results, error }: { item: any, result
    return (
       <div>
          <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl">
+         <ItemGraphicsCarousel item={item}/>
             {/* Fix radix error with dialog title */}
             <DialogTitle asChild>
                <VisuallyHidden>Hidden dialog title</VisuallyHidden>

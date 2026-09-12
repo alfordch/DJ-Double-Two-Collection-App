@@ -54,7 +54,7 @@ export default function ItemResult({ item }: { item: any }) {
                </div>
             </div>
          </DialogTrigger>
-         <ViewTracks item={item} results={results} error={error}/>
+            <ViewTracks item={item} results={results} error={error}/>
       </Dialog>
    )
 }

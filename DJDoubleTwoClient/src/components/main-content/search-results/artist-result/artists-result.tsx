@@ -19,7 +19,7 @@ export default function ArtistResult({ artist }: { artist: any }) {
          res = await fetch(`/items/searchItemsByArtist?q=${encodeURIComponent(artist.ArtistID)}`)
 
          if (!res.ok) {
-            throw new Error("Fetch Failed")
+            throw new Error("Fetch relatedItems Failed")
          }
          const data = await res.json()
          setResults(data)
