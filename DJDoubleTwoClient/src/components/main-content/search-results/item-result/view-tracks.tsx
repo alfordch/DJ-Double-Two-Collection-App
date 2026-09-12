@@ -24,7 +24,6 @@ export default function ViewTracks({ item, results, error }: { item: any, result
    return (
       <div>
          <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl">
-         <ItemGraphicsCarousel item={item}/>
             {/* Fix radix error with dialog title */}
             <DialogTitle asChild>
                <VisuallyHidden>Hidden dialog title</VisuallyHidden>
@@ -36,21 +35,30 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                </DialogDescription>
                <div className="flex items-center gap-3">
                   <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
-                        {!imgError ? 
-                           <img src={`/webGraphics/${item.ItemID}/graphics/Cover.webp`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
-                        :
-                           <img src={`/fallbackGraphics/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
-                        }
+                     {!imgError ? 
+                        <img src={`/webGraphics/${item.ItemID}/graphics/Cover.webp`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
+                     :
+                        <img src={`/fallbackGraphics/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
+                     }
 
-                        {!imgError &&
-                           <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
-                              <Dialog>
-                                 <DialogTrigger>
-                                       <Search className="w-15 h-15 cursor-pointer" />
-                                 </DialogTrigger>
-                              </Dialog>
-                           </div>
-                        }
+                     {!imgError &&
+                        <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
+                           <Dialog>
+                              <DialogTrigger>
+                                    <Search className="w-15 h-15 cursor-pointer" />
+                              </DialogTrigger>
+                              <DialogContent className="w-3/4 !max-w-4xl" showCloseButton={false}>
+                                    <DialogTitle asChild>
+                                    <VisuallyHidden>Hidden dialog title</VisuallyHidden>
+                                 </DialogTitle>
+                                 <DialogDescription asChild>
+                                    <VisuallyHidden>Hidden dialog description</VisuallyHidden>
+                                 </DialogDescription>
+                                 <ItemGraphicsCarousel item={item}/>
+                              </DialogContent>
+                           </Dialog>
+                        </div>
+                     }
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
                         <p className="font-bold leading-tight text-xl">{item.ItemName}</p>
