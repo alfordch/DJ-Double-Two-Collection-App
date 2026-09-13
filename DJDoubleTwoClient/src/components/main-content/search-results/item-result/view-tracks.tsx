@@ -16,14 +16,19 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 
 import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
-import ItemGraphicsCarousel from "@/components/main-content/search-results/item-result/items-graphics-carousel"
+import ItemGraphicsCarousel from "@/components/main-content/search-results/item-result/image-graphics-viewer"
 
 export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
    const [imgError, setImgError] = useState(false)
+   var imgSrc = `/webGraphics/${item.ItemID}/graphics/Cover.webp`
 
+   const specialGraphicsList = [30414578, 35783428]
+   if (specialGraphicsList.includes(item.ItemID)) {
+      imgSrc = `/webGraphics/${item.ItemID}/graphics/Cover_1.webp`
+   }
    return (
       <div>
-         <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl">
+         <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl max-h-99/100">
             {/* Fix radix error with dialog title */}
             <DialogTitle asChild>
                <VisuallyHidden>Hidden dialog title</VisuallyHidden>
@@ -36,7 +41,7 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                <div className="flex items-center gap-3">
                   <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                      {!imgError ? 
-                        <img src={`/webGraphics/${item.ItemID}/graphics/Cover.webp`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
+                        <img src={imgSrc} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
                      :
                         <img src={`/fallbackGraphics/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
                      }
@@ -70,8 +75,10 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                         <p className="text-lg font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
                   </div>
                </div>
+
                <Separator orientation="horizontal" className="mt-3 mb-2"/>
-               <ScrollArea className={`${results.length > 10 && 'h-100'}`}>
+               
+               <ScrollArea type="always" className={`${results.length > 7 && 'h-100'}`}>
                   <div className={`${results.length > 10 && "pr-3"}`}>
                         <ViewTracksTable results={results} itemArtist={item.ItemArtists}></ViewTracksTable>
                   </div>
