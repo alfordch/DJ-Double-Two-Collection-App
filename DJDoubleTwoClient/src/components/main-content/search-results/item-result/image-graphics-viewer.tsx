@@ -9,7 +9,7 @@ interface WebGraphic {
     url?: string;
 }
 
-export default function ItemGraphicsCarousel({ item } : { item: any }) {
+export default function ItemGraphicsViewer({ item } : { item: any }) {
     const [currentImage, setCurrentImage] = useState(0)
     const [error, setError] = useState("")
     const [webGraphics, setWebGraphics] = useState<WebGraphic[]>([])
@@ -118,9 +118,13 @@ export default function ItemGraphicsCarousel({ item } : { item: any }) {
 
             {gridView &&
                 <ScrollArea className={`${sortedWebGraphics.length > 12 && 'h-[80vh]'}`}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-3 py-3">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-3 py-3 items-center">
                         {sortedWebGraphics.map((graphic, idx) => (
-                            <img src={graphic.url} alt="result graphic" key={idx} className="border-5 drop-shadow-lg border-accent rounded-lg cursor-pointer" onClick={() => handleImageClick(idx)}></img>
+                            // I love magic numbers
+                            <div key={idx+99} className="group relative max-w-sm overflow-hidden rounded-lg transition-shadow duration-200 hover:shadow-md">
+                                <img src={graphic.url} alt="result graphic" key={idx} className="border-5 drop-shadow-lg border-accent rounded-lg object-cover" ></img>
+                                <div key={idx+198} className="absolute bottom-0 left-0 right-0 top-0 h-full w-full inset-0 overflow-hidden bg-muted-foreground opacity-0 hover:opacity-65 cursor-pointer" onClick={() => handleImageClick(idx)}/>
+                            </div>
                         ))}
                     </div>
                 </ScrollArea>

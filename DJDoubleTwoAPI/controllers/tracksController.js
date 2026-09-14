@@ -26,7 +26,8 @@ const tracksQuery = `
       MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
       YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
       t.TrackLength,
-      t.TrackItemLoc
+      t.TrackItemLoc,
+      t.TrackItem
    FROM
       Tracks t
    INNER JOIN
@@ -121,7 +122,8 @@ const tracksItemQuery = `
       MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
       YEAR(i.ItemReleaseDate) AS ItemReleaseYear,
       t.TrackLength,
-      t.TrackItemLoc
+      t.TrackItemLoc,
+      t.TrackItem
    FROM
       Tracks t
    INNER JOIN

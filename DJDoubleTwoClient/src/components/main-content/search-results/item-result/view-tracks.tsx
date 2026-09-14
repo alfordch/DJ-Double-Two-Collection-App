@@ -16,7 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 
 import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
-import ItemGraphicsCarousel from "@/components/main-content/search-results/item-result/image-graphics-viewer"
+import ItemGraphicsViewer from "@/components/main-content/search-results/item-result/image-graphics-viewer"
 
 export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
    const [imgError, setImgError] = useState(false)
@@ -28,7 +28,7 @@ export default function ViewTracks({ item, results, error }: { item: any, result
    }
    return (
       <div>
-         <DialogContent showCloseButton={false} className="w-3/4 !max-w-4xl max-h-99/100">
+         <DialogContent showCloseButton={true} className="w-3/4 !max-w-4xl max-h-99/100">
             {/* Fix radix error with dialog title */}
             <DialogTitle asChild>
                <VisuallyHidden>Hidden dialog title</VisuallyHidden>
@@ -52,14 +52,14 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                               <DialogTrigger>
                                     <Search className="w-15 h-15 cursor-pointer" />
                               </DialogTrigger>
-                              <DialogContent className="w-3/4 !max-w-4xl" showCloseButton={false}>
+                              <DialogContent className="w-3/4 !max-w-4xl" showCloseButton={true}>
                                     <DialogTitle asChild>
                                     <VisuallyHidden>Hidden dialog title</VisuallyHidden>
                                  </DialogTitle>
                                  <DialogDescription asChild>
                                     <VisuallyHidden>Hidden dialog description</VisuallyHidden>
                                  </DialogDescription>
-                                 <ItemGraphicsCarousel item={item}/>
+                                 <ItemGraphicsViewer item={item}/>
                               </DialogContent>
                            </Dialog>
                         </div>
@@ -79,16 +79,16 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                <Separator orientation="horizontal" className="mt-3 mb-2"/>
                
                <ScrollArea type="always" className={`${results.length > 7 && 'h-100'}`}>
-                  <div className={`${results.length > 10 && "pr-3"}`}>
+                  <div className={`${results.length > 7 && "pr-3"}`}>
                         <ViewTracksTable results={results} itemArtist={item.ItemArtists}></ViewTracksTable>
                   </div>
                </ScrollArea>
             </DialogHeader>
-            <DialogFooter>
+            {/* <DialogFooter>
                <DialogClose asChild>
                   <Button variant="outline" className="cursor-pointer">Close</Button>
                </DialogClose>
-            </DialogFooter>
+            </DialogFooter> */}
          </DialogContent>
       </div>
    )
