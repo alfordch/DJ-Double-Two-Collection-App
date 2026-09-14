@@ -29,7 +29,7 @@ export function NavMain({navItems}: {
             {navItems.map((item) => {
                if (location.pathname.substring(1) === item.name.replace(/\s/g, "").toLowerCase()) {
                   return(
-                     <SidebarMenuItem key={item.name}>
+                     <SidebarMenuItem key={item.name} className="drop-shadow-lg">
                         <SidebarMenuButton asChild isActive>
                            <Link to={item.url} className="flex items-center gap-2">
                               <item.icon className="size-4" />

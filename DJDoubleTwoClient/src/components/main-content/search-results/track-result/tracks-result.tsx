@@ -8,7 +8,7 @@ export default function TrackResult({ track }: { track: any }) {
          <div className="flex items-center gap-3">
             <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                {!imgError ? 
-                  <img src={`/webGraphics/${track.TrackItem}/graphics/Cover.webp`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
+                  <img src={`/webGraphics/${track.TrackItem}/${track.TrackItem}.webp`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                :
                   <img src={`/fallbackGraphics/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                }
