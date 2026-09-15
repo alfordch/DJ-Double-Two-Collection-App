@@ -120,3 +120,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: "ItalicCooperBlack";
+  src: local("Cooper Black Italic"),
+  url('./assets/fonts/Cooper\ Black\ Italic.otf')
+}

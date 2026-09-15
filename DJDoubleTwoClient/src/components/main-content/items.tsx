@@ -130,7 +130,7 @@ export default function Items() {
    return (
       <div className="flex flex-col px-5">
       {/* Page Header: Header + Search Input on the same row */}
-         <div className="flex items-center">
+         <div className="flex items-center absolute sticky top-2 mt-2 rounded-lg backdrop-blur-2xl rounded-md z-10">
             <MainHeader headertext="Items" />
             <AppInput placeholder="Items..." buttonLabel="Search" onSubmit={handleSearch} />
          </div>
