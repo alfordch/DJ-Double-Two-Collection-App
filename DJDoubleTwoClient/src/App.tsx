@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
 import { ThemeProvider } from '@/components/theme/theme-provider'
+import { MobileHeader } from "@/components/mobile-header/mobile-header"
 
 // Main content
 import Artists from "@/components/main-content/artists"
@@ -16,7 +17,7 @@ export default function App() {
    //const hideSidebar = location.pathname === "/users";
    
    // Viewport detection
-   const mobile = useMediaQuery({ query: '(min-width: 640px)' })
+   const mobile = useMediaQuery({ query: '(max-width: 1023px)' })
    const desktop = useMediaQuery({ query: '(min-width: 1024px)' })
 
    return (
@@ -33,6 +34,12 @@ export default function App() {
                   </Routes>
                </SidebarInset>
             </SidebarProvider>
+         }
+         
+         {mobile &&
+            <div>
+               <MobileHeader />
+            </div>
          }
       </ThemeProvider>
    )
