@@ -7,9 +7,7 @@ import { ThemeProvider } from '@/components/theme/theme-provider'
 import { MobileHeader } from "@/components/mobile-header/mobile-header"
 
 // Main content
-import Artists from "@/components/main-content/artists"
-import Tracks from "@/components/main-content/tracks"
-import Items from "@/components/main-content/items"
+import MainContent from '@/components/main-content/main-content'
 
 export default function App() {
    // Deprecated /users route
@@ -27,10 +25,10 @@ export default function App() {
                <AppSidebar />
                <SidebarInset style={{ marginLeft: "-1rem" } as React.CSSProperties}>
                   <Routes>
-                     <Route path="/" element={<Tracks />} />
-                     <Route path="/artists" element={<Artists />} />
-                     <Route path="/tracks" element={<Tracks />} />
-                     <Route path="/items" element={<Items />} />
+                     <Route path="/" element={<MainContent key="tracks" contentType='Tracks' />} />
+                     <Route path="/tracks" element={<MainContent key="tracks" contentType='Tracks' />} />
+                     <Route path="/artists" element={<MainContent key="artists" contentType='Artists' />} />
+                     <Route path="/items" element={<MainContent key="items" contentType='Items' />} />
                   </Routes>
                </SidebarInset>
             </SidebarProvider>

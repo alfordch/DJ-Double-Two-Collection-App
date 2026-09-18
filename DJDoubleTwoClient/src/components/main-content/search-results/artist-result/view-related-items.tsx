@@ -15,7 +15,7 @@ import ItemResult from "@/components/main-content/search-results/item-result/ite
 export default function ViewRelatedItems({ artist, results, error }: { artist: any, results: any, error: any}) {
     return (
         <div>
-            <DialogContent showCloseButton={false}>
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Related Items:</DialogTitle>
                     
@@ -38,11 +38,11 @@ export default function ViewRelatedItems({ artist, results, error }: { artist: a
                     </ScrollArea>
 
                 </DialogHeader>
-                <DialogFooter>
+                {/* <DialogFooter>
                     <DialogClose asChild>
                         <Button variant="outline" className="cursor-pointer">Close</Button>
                     </DialogClose>
-                </DialogFooter>
+                </DialogFooter> */}
             </DialogContent>
         </div>
     )
