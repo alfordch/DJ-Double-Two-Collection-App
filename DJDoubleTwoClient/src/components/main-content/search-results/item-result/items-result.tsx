@@ -11,7 +11,12 @@ export default function ItemResult({ item }: { item: any }) {
    const [results, setResults] = useState<any[]>([])
    const [error, setError] = useState("")
    const [imgError, setImgError] = useState(false)
-   
+   var realReleaseDate = true
+
+   if (item.ItemReleaseMonth === 1 && item.ItemReleaseDay === 1) {
+      realReleaseDate = false
+   }
+
    const handleViewTracks = async() => {
       let res
       setError("")
@@ -45,7 +50,13 @@ export default function ItemResult({ item }: { item: any }) {
                      <p className="font-bold leading-tight">{item.ItemName}</p>
                      <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Artist:</span> {item.ItemArtists}</p>
                      <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Label:</span> {item.ItemLabel}</p>
-                     <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Release Date:</span> {item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</p>
+                     <p className="text-sm text-muted-foreground leading-tight">
+                        {realReleaseDate ?
+                           <span><span className="font-bold">Release Date:</span> {item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span>
+                           :
+                           <span><span className="font-bold">Release Year:</span> {item.ItemReleaseYear}</span>
+                        }
+                     </p>
                      <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Track Count:</span> {item.ItemTrackCount}</p>
                   </div>
                </div>
@@ -54,7 +65,7 @@ export default function ItemResult({ item }: { item: any }) {
                </div>
             </div>
          </DialogTrigger>
-            <ViewTracks item={item} results={results} error={error}/>
+            <ViewTracks item={item} results={results} realReleaseDate={realReleaseDate} error={error}/>
       </Dialog>
    )
 }

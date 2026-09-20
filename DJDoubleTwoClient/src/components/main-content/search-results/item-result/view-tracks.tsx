@@ -18,7 +18,7 @@ import { Search } from "lucide-react"
 import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
 import ItemGraphicsViewer from "@/components/main-content/search-results/item-result/image-graphics-viewer"
 
-export default function ViewTracks({ item, results, error }: { item: any, results: any, error: any}) {
+export default function ViewTracks({ item, results, realReleaseDate, error }: { item: any, results: any, realReleaseDate: boolean, error: any}) {
    const [imgError, setImgError] = useState(false)
    var imgSrc = `/webGraphics/${item.ItemID}/graphics/Cover.webp`
 
@@ -68,7 +68,7 @@ export default function ViewTracks({ item, results, error }: { item: any, result
                   <div className="flex flex-col flex-1 min-w-0">
                         <p className="font-bold leading-tight text-xl">{item.ItemName}</p>
                         <p className="text-lg">{item.ItemArtists}</p>
-                        <p>{item.ItemLabel} · {item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</p>
+                        <p>{item.ItemLabel} · {realReleaseDate ? <span>{item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span> : <span>{item.ItemReleaseYear}</span>}</p>
                         <p className="text-sm">{item.ItemTrackCount} tracks</p>
                   </div>
                   <div className="text-lg font-bold drop-shadow-lg">
