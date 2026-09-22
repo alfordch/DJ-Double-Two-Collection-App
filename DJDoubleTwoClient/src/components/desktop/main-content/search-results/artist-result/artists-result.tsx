@@ -5,7 +5,7 @@ import {
    DialogTrigger
 } from "@/components/ui/dialog"
 
-import ViewRelatedItems from "@/components/main-content/search-results/artist-result/view-related-items"
+import ViewRelatedItems from "@/components/desktop/main-content/search-results/artist-result/view-related-items"
 
 export default function ArtistResult({ artist }: { artist: any }) {
    const [results, setResults] = useState<any[]>([])

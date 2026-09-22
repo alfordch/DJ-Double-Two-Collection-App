@@ -1,6 +1,6 @@
 import { useState, useEffect }from "react"
-import { NavMain } from "@/components/sidebar/nav-main"
-import { AppSidebarHeader } from "@/components/sidebar/sidebar-header"
+import { NavMain } from "@/components/desktop/sidebar/nav-main"
+import { AppSidebarHeader } from "@/components/desktop/sidebar/sidebar-header"
 
 import {
   Sidebar,

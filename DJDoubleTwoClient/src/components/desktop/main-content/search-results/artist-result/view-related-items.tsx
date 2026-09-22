@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
-import ItemResult from "@/components/main-content/search-results/item-result/items-result"
+import ItemResult from "@/components/desktop/main-content/search-results/item-result/items-result"
 
 export default function ViewRelatedItems({ artist, results, error }: { artist: any, results: any, error: any}) {
     return (

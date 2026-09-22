@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Music, Disc3, MicVocal } from "lucide-react"
-import { AppInput } from "@/components/input/app-input"
-import { MainHeader } from "@/components/main-header"
+import { AppInput } from "@/components/desktop/input/app-input"
+import { MainHeader } from "@/components/desktop/main-header"
 import { Separator } from "@/components/ui/separator"
 import { 
    Pagination,
@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/pagination"
 
 // Result import
-import TrackResult from "@/components/main-content/search-results/track-result/tracks-result"
-import ItemResult from "@/components/main-content/search-results/item-result/items-result"
-import ArtistResult from "@/components/main-content/search-results/artist-result/artists-result"
-import EmptySearch from "@/components/main-content/search-results/empty-results"
+import TrackResult from "@/components/desktop/main-content/search-results/track-result/tracks-result"
+import ItemResult from "@/components/desktop/main-content/search-results/item-result/items-result"
+import ArtistResult from "@/components/desktop/main-content/search-results/artist-result/artists-result"
+import EmptySearch from "@/components/desktop/main-content/search-results/empty-results"
 
 export default function MainContent({ contentType } : { contentType: string }) {
     // Set contentType vars
