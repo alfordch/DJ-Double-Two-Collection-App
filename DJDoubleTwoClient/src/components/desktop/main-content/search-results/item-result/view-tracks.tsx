@@ -15,8 +15,8 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 
-import ViewTracksTable from "@/components/main-content/search-results/item-result/view-tracks-table"
-import ItemGraphicsViewer from "@/components/main-content/search-results/item-result/image-graphics-viewer"
+import ViewTracksTable from "@/components/desktop/main-content/search-results/item-result/view-tracks-table"
+import ItemGraphicsViewer from "@/components/desktop/main-content/search-results/item-result/image-graphics-viewer"
 
 export default function ViewTracks({ item, results, realReleaseDate, error }: { item: any, results: any, realReleaseDate: boolean, error: any}) {
    const [imgError, setImgError] = useState(false)

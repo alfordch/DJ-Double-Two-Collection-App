@@ -5,7 +5,7 @@ import {
    DialogTrigger
 } from "@/components/ui/dialog"
 
-import ViewTracks from "@/components/main-content/search-results/item-result/view-tracks"
+import ViewTracks from "@/components/desktop/main-content/search-results/item-result/view-tracks"
 
 export default function ItemResult({ item }: { item: any }) {
    const [results, setResults] = useState<any[]>([])
