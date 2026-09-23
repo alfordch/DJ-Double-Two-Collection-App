@@ -1,5 +1,5 @@
 import { ModeToggle } from '@/components/theme/mode-toggle'
-import { useState, useEffect, startTransition } from 'react'
+import { useState, useEffect } from 'react'
 
 export function MobileHeader({ path } : { path: string }) {
     const [show, setShow] = useState(true)
@@ -15,12 +15,11 @@ export function MobileHeader({ path } : { path: string }) {
         return () => {
             window.removeEventListener("scroll", handleScroll)
         }
-    }, []);
-
-
+    }, [])
 
     return (
-            <div className={`p-5 flex items-center justify-between bg-accent drop-shadow-md transition-all duration-300 ease-in-out ${show ? 'translate-y-0 opacity-100' : 'absolute -top-40 opacity-0'}`}>
+        <div className={`drop-shadow-md overflow-hidden transition-all duration-400 ease-in-out ${show ? 'h-[72px] opacity-100 translate-y-0' : 'h-0 opacity-0 -translate-y-full'}`}>
+            <div className="p-5 flex items-center justify-between bg-accent">
                 <div className="flex items-center gap-2">
                     <a href="#/">
                         <img src="/DJDoubleTwo_IV_Logo.png" className="size-10 rounded-md"></img>
@@ -34,5 +33,6 @@ export function MobileHeader({ path } : { path: string }) {
                     <ModeToggle/>
                 </div>
             </div>
+        </div>
     )
 }

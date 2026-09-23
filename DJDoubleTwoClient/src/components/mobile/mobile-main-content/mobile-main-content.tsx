@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Music, Disc3, MicVocal } from "lucide-react"
-import { AppInput } from "@/components/desktop/input/app-input"
-import { MainHeader } from "@/components/desktop/main-header"
+import { MobileAppInput } from "@/components/mobile/mobile-input/input/mobile-app-input"
+import { MobileMainHeader } from "@/components/mobile/mobile-main-header"
 import { Separator } from "@/components/ui/separator"
 import { 
    Pagination,
@@ -155,10 +155,10 @@ export default function MobileMainContent({ contentType } : { contentType: strin
     }
 
     return (
-        <div className="flex flex-col px-5">
-            <div className="flex items-center absolute sticky top-2 mt-2 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4">
-                {/* <MainHeader headertext={headerTexts[index]} /> */}
-                <AppInput placeholder={searchPlaceholders[index]} buttonLabel="Search" onSubmit={handleSearch} />
+        <div className="flex flex-col px-2">
+            <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2">
+                <MobileMainHeader headertext={headerTexts[index]} />
+                <MobileAppInput placeholder={searchPlaceholders[index]} buttonLabel="Search" onSubmit={handleSearch} />
             </div>
 
             {/* <Separator orientation="horizontal" className="w-full mb-4" /> */}

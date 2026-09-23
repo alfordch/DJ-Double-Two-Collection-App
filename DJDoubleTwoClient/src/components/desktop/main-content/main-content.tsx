@@ -169,15 +169,15 @@ export default function MainContent({ contentType } : { contentType: string }) {
                 )}
                 
                 {loading && 
-                    <EmptySearch Icon={Music} searchType={contentType} loading={true} />
+                    <EmptySearch Icon={icons[index]} searchType={contentType} loading={true} />
                 }
 
                 {error && 
-                    <EmptySearch Icon={Music} searchType={contentType} error={error} />
+                    <EmptySearch Icon={icons[index]} searchType={contentType} error={error} />
                 }
 
                 {!loading && !error && results.length === 0 && searched && 
-                    <EmptySearch Icon={Music} searchType={contentType} noneFound={true}/>
+                    <EmptySearch Icon={icons[index]} searchType={contentType} noneFound={true}/>
                 }
 
                 {!loading && searched && results.length !== 0 && 

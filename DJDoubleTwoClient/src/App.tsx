@@ -8,7 +8,7 @@ import { MobileHeader } from "@/components/mobile/mobile-header/mobile-header"
 
 // Main content
 import MainContent from '@/components/desktop/main-content/main-content'
-import MobileMainContent from '@/components/mobile/mobile-main-content/main-content'
+import MobileMainContent from '@/components/mobile/mobile-main-content/mobile-main-content'
 
 export default function App() {
    const location = useLocation().pathname;
