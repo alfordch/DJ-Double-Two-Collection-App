@@ -15,7 +15,7 @@ import {
 
 // Result import
 import TrackResult from "@/components/desktop/main-content/search-results/track-result/tracks-result"
-import ItemResult from "@/components/desktop/main-content/search-results/item-result/items-result"
+import MobileItemResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-item-result/mobile-items-result"
 import ArtistResult from "@/components/desktop/main-content/search-results/artist-result/artists-result"
 import EmptySearch from "@/components/desktop/main-content/search-results/empty-results"
 
@@ -40,7 +40,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
             case 0:
                 return <TrackResult track={result} />;
             case 1:
-                return <ItemResult item={result} />;
+                return <MobileItemResult item={result} />;
             case 2:
                 return <ArtistResult artist={result} />;
             default: 
@@ -155,7 +155,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
     }
 
     return (
-        <div className="flex flex-col px-2">
+        <div className="flex flex-col px-2 text-sm">
             <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2">
                 <MobileMainHeader headertext={headerTexts[index]} />
                 <MobileAppInput placeholder={searchPlaceholders[index]} buttonLabel="Search" onSubmit={handleSearch} />
