@@ -76,7 +76,7 @@ export default function ViewTracks({ item, results, realReleaseDate, error }: { 
                   </div>
                </div>
 
-               <Separator orientation="horizontal" className="mt-3 mb-2"/>
+               <Separator orientation="horizontal" className="mt-2 mb-2"/>
                
                <ScrollArea type="always" className={`${results.length > 7 && 'h-100'}`}>
                   <div className={`${results.length > 7 && "pr-3"}`}>

@@ -5,10 +5,8 @@ import { Root as VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import {
    Dialog,
    DialogTrigger,
-   DialogClose,
    DialogContent,
    DialogDescription,
-   DialogFooter,
    DialogHeader,
    DialogTitle,
 } from "@/components/ui/dialog"
@@ -16,7 +14,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Search } from "lucide-react"
 
 import MobileViewTracksTable from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-item-result/mobile-view-tracks-table"
-import ItemGraphicsViewer from "@/components/desktop/main-content/search-results/item-result/image-graphics-viewer"
+import MobileItemGraphicsViewer from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-item-result/mobile-image-graphics-viewer"
 
 export default function MobileViewTracks({ item, results, realReleaseDate, error }: { item: any, results: any, realReleaseDate: boolean, error: any}) {
    const [imgError, setImgError] = useState(false)
@@ -54,14 +52,14 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                               <DialogTrigger>
                                     <Search className="w-15 h-15 cursor-pointer" />
                               </DialogTrigger>
-                              <DialogContent className="w-3/4 !max-w-4xl" showCloseButton={true}>
+                              <DialogContent className="w-[85vw] !max-w-4xl" showCloseButton={false}>
                                     <DialogTitle asChild>
                                     <VisuallyHidden>Hidden dialog title</VisuallyHidden>
                                  </DialogTitle>
                                  <DialogDescription asChild>
                                     <VisuallyHidden>Hidden dialog description</VisuallyHidden>
                                  </DialogDescription>
-                                 <ItemGraphicsViewer item={item}/>
+                                 <MobileItemGraphicsViewer item={item}/>
                               </DialogContent>
                            </Dialog>
                         </div>
@@ -79,7 +77,7 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                         <p className="text-md font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
                   </div>
 
-                  <Separator orientation="horizontal" className="mt-3 mb-2 w-full flex-shrink-0"/>
+                  <Separator orientation="horizontal" className="mt-2 mb-2 w-full flex-shrink-0"/>
                   
                   <ScrollArea className="w-full flex-1 max-h-[35vh]">
                      <div className="">
