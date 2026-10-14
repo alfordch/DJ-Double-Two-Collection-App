@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom"
 import { ChevronLeft, ChevronRight, GalleryHorizontal, LayoutGrid } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -15,6 +16,7 @@ export default function ItemGraphicsViewer({ item } : { item: any }) {
     const [webGraphics, setWebGraphics] = useState<WebGraphic[]>([])
     const [gridView, setGridView] = useState(false)
     const [carouselView, setCarouselView] = useState(true)
+    const [imageFullscreen, setImageFullscreen] = useState(false)
 
     const handlePreviousClick = () => {
         setCurrentImage(currentImage === 0 ? webGraphics.length - 1 : currentImage - 1)
@@ -32,6 +34,10 @@ export default function ItemGraphicsViewer({ item } : { item: any }) {
     const handleImageClick = (index: number) => {
         setCurrentImage(index);
         handleViewClick();
+    }
+
+    const handleFullscreenClick = () => {
+        setImageFullscreen(!imageFullscreen)
     }
 
     const getWebGraphics = async(itemID: number) => {
@@ -108,7 +114,7 @@ export default function ItemGraphicsViewer({ item } : { item: any }) {
                     
                     <div className="flex min-w-0 flex-1 items-center justify-center">
                         {sortedWebGraphics.map((graphic, idx) => (
-                            <img src={graphic.url} alt="result graphic" className={currentImage === idx ? 'block max-h-[80vh] max-w-full object-contain border-5 drop-shadow-lg border-accent rounded-lg' : 'hidden'} key={idx}></img>
+                            <img src={graphic.url} onClick={handleFullscreenClick} alt="result graphic" className={currentImage === idx ? 'block max-h-[80vh] max-w-full object-contain border-5 drop-shadow-lg border-accent rounded-lg cursor-pointer' : 'hidden'} key={idx}></img>
                         ))}
                     </div>
 
@@ -116,6 +122,14 @@ export default function ItemGraphicsViewer({ item } : { item: any }) {
                 </div>
             }
 
+            {imageFullscreen &&
+                createPortal(
+                    <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center bg-black/90 cursor-pointer" onClick={handleFullscreenClick}>
+                        <img src={sortedWebGraphics[currentImage].url} className="w-full h-full object-contain cursor-pointer"/>
+                    </div>
+                , document.body)
+            }
+            
             {gridView &&
                 <ScrollArea className={`${sortedWebGraphics.length > 12 && 'h-[80vh]'}`}>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-3 py-3 items-center">
