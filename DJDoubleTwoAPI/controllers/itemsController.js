@@ -58,6 +58,28 @@ const itemsRandQuery = `
       100;
 `
 
+const itemsByIDQuery = `
+SELECT
+      i.ItemID,
+      i.ItemName, 
+      group_concat(DISTINCT a.artistname order by a.artistname separator ', ') as ItemArtists,
+      i.ItemFormat, 
+      DAY(i.ItemReleaseDate) AS ItemReleaseDay,
+      MONTH(i.ItemReleaseDate) AS ItemReleaseMonth,
+      YEAR(i.ItemReleaseDate) AS ItemReleaseYear, 
+      i.ItemLabel, 
+      i.ItemTrackCount,
+      i.ItemCoverImage
+   FROM
+      ItemArtists ia
+   INNER JOIN
+      Items i on ia.itemid = i.itemid
+   INNER JOIN
+      Artists a on a.artistid = ia.artistid
+   WHERE
+      i.itemid = ?
+`
+
 const itemsByArtistQuery = `
    (SELECT 
       i.ItemID,
@@ -183,6 +205,20 @@ exports.searchItemsByArtist = (req, res) => {
    const values = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
 
    db.query(itemsByArtistQuery, values, (err, results) => {
+      if (err) {
+         console.error('Search query error:', err);
+
+         return res.status(500).json({ error: 'Search failed' });
+      }
+      res.json(results);
+   });
+};
+
+exports.searchItemsByID = (req, res) => {
+   const searchTerm = `${req.query.q || ''}`;
+   const values = [searchTerm];
+
+   db.query(itemsByIDQuery, values, (err, results) => {
       if (err) {
          console.error('Search query error:', err);
 

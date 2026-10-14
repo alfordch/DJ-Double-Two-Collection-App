@@ -50,7 +50,9 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                         <div className="rounded-lg absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-muted-foreground bg-fixed opacity-0 transition duration-200 ease-in-out hover:opacity-65 flex items-center justify-center">
                            <Dialog>
                               <DialogTrigger>
+                                 <div className="w-55 h-55 cursor-pointer flex items-center justify-center">
                                     <Search className="w-15 h-15 cursor-pointer" />
+                                 </div>
                               </DialogTrigger>
                               <DialogContent className="w-[85vw] !max-w-4xl" showCloseButton={false}>
                                     <DialogTitle asChild>

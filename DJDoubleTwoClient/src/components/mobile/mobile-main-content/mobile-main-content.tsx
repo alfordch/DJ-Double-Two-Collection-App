@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/pagination"
 
 // Result import
-import TrackResult from "@/components/desktop/main-content/search-results/track-result/tracks-result"
+import MobileTrackResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-track-result/mobile-tracks-result"
 import MobileItemResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-item-result/mobile-items-result"
 import ArtistResult from "@/components/desktop/main-content/search-results/artist-result/artists-result"
 import EmptySearch from "@/components/desktop/main-content/search-results/empty-results"
@@ -38,7 +38,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
     const ResultComponent = ({ result, type }: { result: any; type: number }) => {
         switch (type) {
             case 0:
-                return <TrackResult track={result} />;
+                return <MobileTrackResult track={result} />;
             case 1:
                 return <MobileItemResult item={result} />;
             case 2:
