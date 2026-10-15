@@ -24,10 +24,8 @@ export default function MobileTrackResult({ track }: { track: any }) {
                <div className="flex flex-col flex-1 min-w-0">
                   <p className="font-bold leading-tight">{track.TrackName}</p>
                   <p className="text-sm text-muted-foreground leading-tight font-bold">{track.TrackArtists}</p>
-                  <p className="text-sm text-foreground leading-tight">{track.ItemName}{/*  ({track.ItemLabel}) [{track.ItemReleaseYear}] | {track.TrackItemLoc} */}</p>
+                  <p className="text-sm italic text-foreground leading-tight">{track.ItemName}</p>
                   <p className="text-sm text-muted-foreground leading-tight">{track.ItemReleaseYear}</p>
-                  {/* {track.TrackFeatures && <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Featuring:</span> {track.TrackFeatures}</p>} */}
-                  {/* <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Produced By:</span> {track.TrackProducers}</p> */}
                </div>
             </div>
             <div className="font-bold drop-shadow-lg ml-1">

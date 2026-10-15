@@ -124,8 +124,8 @@ export default function ItemGraphicsViewer({ item } : { item: any }) {
 
             {imageFullscreen &&
                 createPortal(
-                    <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center bg-black/90 cursor-pointer" onClick={handleFullscreenClick}>
-                        <img src={sortedWebGraphics[currentImage].url} className="w-full h-full object-contain cursor-pointer"/>
+                    <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center bg-black/90 cursor-pointer pointer-events-auto" onClick={handleFullscreenClick}>
+                        <img src={sortedWebGraphics[currentImage].url} className="w-full h-full object-contain pointer-events-none"/>
                     </div>
                 , document.body)
             }
