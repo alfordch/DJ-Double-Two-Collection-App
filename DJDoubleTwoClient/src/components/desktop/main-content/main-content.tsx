@@ -111,7 +111,7 @@ export default function MainContent({ contentType } : { contentType: string }) {
             let errorMessage = "Error Encountered In Call To thedungeon0000 API, Please Try Again Later"
 
             if (res) {
-            errorMessage = `${res.status}: ${res.statusText}`
+                errorMessage = `${res.status}: ${res.statusText}`
             }
 
             setError(errorMessage)

@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Shuffle } from "lucide-react"
-import { Plus } from "lucide-react"
 
 export function MobileAppInput({
       placeholder = "Search...",
@@ -16,7 +14,6 @@ export function MobileAppInput({
    }) {
 
    const [value, setValue] = useState("")
-   const location = useLocation();
 
    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault()

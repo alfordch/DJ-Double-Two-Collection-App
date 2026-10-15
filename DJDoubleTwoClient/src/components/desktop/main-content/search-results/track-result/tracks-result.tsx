@@ -16,7 +16,7 @@ export default function TrackResult({ track }: { track: any }) {
             <div className="flex flex-col flex-1 min-w-0">
                <p className="font-bold leading-tight">{track.TrackName}</p>
                <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Artist:</span> {track.TrackArtists}</p>
-               <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Item:</span> {track.ItemName} ({track.ItemLabel}) [{track.ItemReleaseYear}] | {track.TrackItemLoc}</p>
+               <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Item:</span> <span className="italic">{track.ItemName}</span> ({track.ItemLabel}) [{track.ItemReleaseYear}] | {track.TrackItemLoc}</p>
                {track.TrackFeatures && <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Featuring:</span> {track.TrackFeatures}</p>}
                <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Produced By:</span> {track.TrackProducers}</p>
             </div>

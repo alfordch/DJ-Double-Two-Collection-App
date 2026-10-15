@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Disc3 } from "lucide-react"
 import {
    Dialog,
    DialogTrigger
@@ -81,7 +80,7 @@ export default function MobileItemResult({ item }: { item: any }) {
                </div>
             </div>
          </DialogTrigger>
-         <MobileViewTracks item={item} results={results} realReleaseDate={realReleaseDate} error={error}/>
+         <MobileViewTracks item={item} results={results} realReleaseDate={realReleaseDate} error={error} renderDialogContent={true}/>
       </Dialog>
    )
 }

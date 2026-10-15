@@ -121,7 +121,7 @@ export default function MobileItemGraphicsViewer({ item } : { item: any }) {
 
             {imageFullscreen &&
                 createPortal(
-                    <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center bg-black/90" onClick={handleFullscreenClick}>
+                    <div className="fixed inset-0 z-[9999] flex h-screen w-screen items-center justify-center bg-black/90 cursor-pointer pointer-events-auto" onClick={handleFullscreenClick}>
                         <img src={sortedWebGraphics[currentImage].url} className="w-full h-full object-contain"/>
                     </div>
                 , document.body)
@@ -142,7 +142,8 @@ export default function MobileItemGraphicsViewer({ item } : { item: any }) {
             }
 
             <Separator orientation="horizontal" className="mt-3 mb-3"/>
-
+            
+            {!imageFullscreen && 
             <div className="flex items-center justify-center gap-3">
                 {carouselView && <Button variant="outline" className="flex-shrink-0 nav-button left cursor-pointer" onClick={handlePreviousClick}><ChevronLeft/></Button>}
 
@@ -156,6 +157,7 @@ export default function MobileItemGraphicsViewer({ item } : { item: any }) {
 
                 {carouselView && <Button variant="outline" className="flex-shrink-0 nav-button right cursor-pointer" onClick={handleNextClick}><ChevronRight/></Button>}
             </div>
+            }
         </div>
     )
 }
