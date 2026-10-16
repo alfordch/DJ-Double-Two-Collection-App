@@ -25,7 +25,7 @@ export function MobileMainHeader({ headertext = "..."}) {
             <NavigationMenu>
                 <NavigationMenuItem className="list-none">
                     <NavigationMenuTrigger>
-                        <h1 className="text-base font-medium">{ headertext }</h1>
+                        <h1 className="text-base font-medium cursor-pointer">{ headertext }</h1>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul>

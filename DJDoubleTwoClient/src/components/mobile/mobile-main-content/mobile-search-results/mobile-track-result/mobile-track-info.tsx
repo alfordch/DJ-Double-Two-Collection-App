@@ -72,7 +72,7 @@ export default function MobileTrackInfo({ track }: { track: any }) {
                     
                     <Dialog>
                         <DialogTrigger asChild>
-                            <div onClick={handleItemClickSearch} className="italic text-foreground leading-tight cursor-pointer">{track.ItemName}</div>
+                            <div onClick={handleItemClickSearch} className="italic underline text-foreground leading-tight cursor-pointer">{track.ItemName}</div>
                         </DialogTrigger>
                         {loaded && <MobileTrackViewItem item={itemResult} results={tracksResult} error={error}/>}
                     </Dialog>

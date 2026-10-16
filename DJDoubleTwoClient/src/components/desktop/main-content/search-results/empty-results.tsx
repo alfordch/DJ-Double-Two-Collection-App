@@ -51,7 +51,6 @@ export default function EmptySearch({Icon, searchType, noneFound, loading, error
                }
             </EmptyDescription>
          </EmptyHeader>
-         {/* <div className='h-50'></div> */}
       </Empty>
    )
 }

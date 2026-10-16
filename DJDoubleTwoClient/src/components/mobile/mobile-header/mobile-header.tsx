@@ -1,4 +1,7 @@
 import { ModeToggle } from '@/components/theme/mode-toggle'
+import { InfoIcon } from 'lucide-react'
+import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
 import { useState, useEffect } from 'react'
 
 export function MobileHeader({ path } : { path: string }) {
@@ -18,7 +21,7 @@ export function MobileHeader({ path } : { path: string }) {
     }, [])
 
     return (
-        <div className={`drop-shadow-md overflow-hidden transition-all duration-400 ease-in-out ${show ? 'h-[72px] opacity-100 translate-y-0' : 'h-0 opacity-0 -translate-y-full'}`}>
+        <div className={`drop-shadow-md overflow-hidden transition-all duration-400 ease-in-out ${show ? 'h-[75px] opacity-100 translate-y-0' : 'h-0 opacity-0 -translate-y-full'}`}>
             <div className="p-5 flex items-center justify-between bg-accent">
                 <div className="flex items-center gap-2">
                     <a href="#/">
@@ -29,7 +32,9 @@ export function MobileHeader({ path } : { path: string }) {
                         <span>Media Collection</span>
                     </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center h-5 gap-2">
+                    <Button size="icon" variant="ghost"><InfoIcon className=""/></Button>
+                    <Separator orientation='vertical'/>
                     <ModeToggle/>
                 </div>
             </div>
