@@ -63,13 +63,13 @@ export default function MobileItemResult({ item }: { item: any }) {
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
                      <p className="font-bold leading-tight">{item.ItemName}</p>
-                     <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Artist:</span> {item.ItemArtists}</p>
-                     <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Label:</span> {item.ItemLabel}</p>
+                     <p className="text-sm font-bold text-muted-foreground leading-tight">{item.ItemArtists}</p>
+                     <p className="text-sm italic text-muted-foreground leading-tight">{item.ItemLabel}</p>
                      <p className="text-sm text-muted-foreground leading-tight">
                         {realReleaseDate ?
-                           <span><span className="font-bold">Release Date:</span> {item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span>
+                           <span>{item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span>
                            :
-                           <span><span className="font-bold">Release Year:</span> {item.ItemReleaseYear}</span>
+                           <span>{item.ItemReleaseYear}</span>
                         }
                      </p>
                      <p className="text-sm text-muted-foreground leading-tight"><span className="font-bold">Track Count:</span> {item.ItemTrackCount}</p>

@@ -16,7 +16,7 @@ import {
 // Result import
 import MobileTrackResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-track-result/mobile-tracks-result"
 import MobileItemResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-item-result/mobile-items-result"
-import ArtistResult from "@/components/desktop/main-content/search-results/artist-result/artists-result"
+import MobileArtistResult from "@/components/mobile/mobile-main-content/mobile-search-results/mobile-artist-result/mobile-artists-result"
 import EmptySearch from "@/components/desktop/main-content/search-results/empty-results"
 
 export default function MobileMainContent({ contentType } : { contentType: string }) {
@@ -42,7 +42,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
             case 1:
                 return <MobileItemResult item={result} />;
             case 2:
-                return <ArtistResult artist={result} />;
+                return <MobileArtistResult artist={result} />;
             default: 
                 return null
         }
@@ -169,15 +169,15 @@ export default function MobileMainContent({ contentType } : { contentType: strin
                 )}
                 
                 {loading && 
-                    <EmptySearch Icon={Music} searchType={contentType} loading={true} />
+                    <EmptySearch Icon={icons[index]} searchType={contentType} loading={true} />
                 }
 
                 {error && 
-                    <EmptySearch Icon={Music} searchType={contentType} error={error} />
+                    <EmptySearch Icon={icons[index]} searchType={contentType} error={error} />
                 }
 
                 {!loading && !error && results.length === 0 && searched && 
-                    <EmptySearch Icon={Music} searchType={contentType} noneFound={true}/>
+                    <EmptySearch Icon={icons[index]} searchType={contentType} noneFound={true}/>
                 }
 
                 {!loading && searched && results.length !== 0 && 
