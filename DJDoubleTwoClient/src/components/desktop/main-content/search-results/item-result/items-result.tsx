@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Disc3 } from "lucide-react"
 import {
    Dialog,
    DialogTrigger

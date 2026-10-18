@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Music, Disc3, MicVocal } from "lucide-react"
 import { MobileAppInput } from "@/components/mobile/mobile-input/input/mobile-app-input"
 import { MobileMainHeader } from "@/components/mobile/mobile-main-header"
-import { Separator } from "@/components/ui/separator"
+
 import { 
    Pagination,
    PaginationContent,
@@ -158,7 +158,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
         <div className="flex flex-col px-2 text-sm">
             <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2">
                 <MobileMainHeader headertext={headerTexts[index]} />
-                <MobileAppInput placeholder={searchPlaceholders[index]} buttonLabel="Search" onSubmit={handleSearch} />
+                <MobileAppInput placeholder={searchPlaceholders[index]} onSubmit={handleSearch} />
             </div>
 
             {/* <Separator orientation="horizontal" className="w-full mb-4" /> */}
@@ -189,10 +189,6 @@ export default function MobileMainContent({ contentType } : { contentType: strin
                 }
 
                 {!searched && <EmptySearch Icon={icons[index]} searchType={contentType} />}
-                
-                {!loading && searched && totalPages == 1 && 
-                    <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
-                }
 
                 {!loading && searched && totalPages > 1 &&
                     <div>
@@ -234,7 +230,6 @@ export default function MobileMainContent({ contentType } : { contentType: strin
                             }
                             </PaginationContent>
                         </Pagination>
-                        <Separator orientation="horizontal" className="w-full mb-4 mt-2" />
                     </div>
                 }
             </div>

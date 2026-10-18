@@ -5,7 +5,6 @@ import { Shuffle } from "lucide-react"
 
 export function MobileAppInput({
       placeholder = "Search...",
-      buttonLabel = "Search",
       onSubmit,
    }: {
       placeholder?: string

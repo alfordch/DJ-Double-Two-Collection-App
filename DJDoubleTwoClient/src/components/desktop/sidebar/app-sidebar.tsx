@@ -1,18 +1,19 @@
-import { useState, useEffect }from "react"
 import { NavMain } from "@/components/desktop/sidebar/nav-main"
 import { AppSidebarHeader } from "@/components/desktop/sidebar/sidebar-header"
+import Footer from '@/components/universal/footer/footer'
 
 import {
   Sidebar,
   SidebarContent,
-  /* SidebarFooter, */
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent
 } from "@/components/ui/sidebar"
 
 import {
   MicVocal,
   Music,
   Disc3,
-  LibraryBig,
 } from "lucide-react"
 
 const data = {
@@ -30,7 +31,6 @@ const data = {
 }
 
 export function AppSidebar({...props }: any) {
-  const [reload, setReload] = useState("");
 
   return (
     <Sidebar variant="floating" collapsible="icon" className="transition-all duration-200" {...props}>
@@ -38,6 +38,13 @@ export function AppSidebar({...props }: any) {
       <SidebarContent>
         <NavMain navItems={data.navItems} />
       </SidebarContent>
+      <SidebarGroup className='-mb-3'>
+        <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
+          <SidebarFooter>
+            <Footer />
+          </SidebarFooter>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </Sidebar>
   )
 }

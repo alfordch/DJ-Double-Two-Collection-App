@@ -1,10 +1,7 @@
 import { ModeToggle } from '@/components/theme/mode-toggle'
-import { InfoIcon } from 'lucide-react'
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
 import { useState, useEffect } from 'react'
 
-export function MobileHeader({ path } : { path: string }) {
+export function MobileHeader() {
     const [show, setShow] = useState(true)
 
     useEffect(() => {
@@ -33,8 +30,6 @@ export function MobileHeader({ path } : { path: string }) {
                     </div>
                 </div>
                 <div className="flex items-center h-5 gap-2">
-                    <Button size="icon" variant="ghost"><InfoIcon className=""/></Button>
-                    <Separator orientation='vertical'/>
                     <ModeToggle/>
                 </div>
             </div>

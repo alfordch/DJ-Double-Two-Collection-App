@@ -2,7 +2,6 @@ import { LucideIcon } from "lucide-react"
 import { Spinner } from "@/components/ui/spinner"
 import {
    Empty,
-   EmptyContent,
    EmptyDescription,
    EmptyHeader,
    EmptyMedia,
