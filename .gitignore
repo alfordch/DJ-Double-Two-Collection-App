@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Vite / React build output (you build into api/client-build)
-DJDoubleTwoAPI/client-build/
+backend/client-build/
 
 # Environment variables (never commit secrets)
 .env
@@ -22,4 +22,8 @@ Thumbs.db
 # package-lock.json
 # yarn.lock
 
-DJDoubleTwoClient/public/
+frontend/public/
+# deployment
+data/
+dist/
+*.sql
