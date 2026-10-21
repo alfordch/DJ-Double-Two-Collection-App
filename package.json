@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "cd DJDoubleTwoClient && npm install && npm run build",
-    "start": "cd DJDoubleTwoAPI && npm install && node index.js",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm install && node index.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:client": "cd DJDoubleTwoClient && npm run dev",
-    "dev:server": "cd DJDoubleTwoAPI && nodemon index.js"
+    "dev:client": "cd frontend && npm run dev",
+    "dev:server": "cd backend && nodemon index.js"
   },
   "devDependencies": {
     "@types/node": "^22.20.2",

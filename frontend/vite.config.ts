@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: '../DJDoubleTwoAPI/client-build',
+      outDir: 'dist',
       emptyOutDir: true,
     },
   };

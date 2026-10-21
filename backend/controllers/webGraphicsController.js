@@ -3,7 +3,7 @@ const path = require('path');
 
 const graphicsDirectory = path.resolve(
    __dirname,
-   '../../DJDoubleTwoClient/public/webGraphics'
+   '../../frontend/public/webGraphics'
 );
 
 exports.getWebGraphics = (req, res) => {
