@@ -1,29 +1,46 @@
-# Node modules and logs
+# dependencies
 node_modules/
-**/node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Vite / React build output (you build into api/client-build)
-backend/client-build/
+# build output
+dist/
+build/
+*.tsbuildinfo
 
-# Environment variables (never commit secrets)
+# environment files and secrets
 .env
-**/.env
+.env.*
+!.env.example
 
-# OS and editor stuff
-.DS_Store
-Thumbs.db
+# logs
+logs/
+*.log
+npm-debug.log*
+
+# editor and OS files
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db
+*.swp
 
-# Lock files
-# package-lock.json
-# yarn.lock
+# deployment and runtime files (not source; backed up separately)
+docker-compose*.yml
+Dockerfile
+.dockerignore
+frontend/nginx.conf
 
-frontend/public/
-# deployment
-data/
-dist/
+# database dumps and backups
 *.sql
+*.sql.gz
+*.bak
+
+# images and other non-source assets in public/ (served from bind mounts)
+frontend/public/*
+!frontend/public/DJDoubleTwo_IV_Logo.png
+!frontend/public/favicon.ico
+
+# runtime data and legacy build output (carried over from the old directory)
+data/
+backend/client-build/
+yarn-debug.log*
+yarn-error.log*
