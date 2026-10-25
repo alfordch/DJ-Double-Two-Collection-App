@@ -20,13 +20,12 @@ export function MobileAppInput({
    }
 
    return (
-      <form onSubmit={handleSubmit} className="flex max-w-sm items-center gap-2">
+      <form onSubmit={handleSubmit} className="flex max-w-sm items-center gap-1">
          <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             id="appInput"
-            className='w-4/5'
          />
          <Button type="button" variant="outline" onClick={() => { if (onSubmit) onSubmit("__shuffle__")}}>
             <Shuffle/>
