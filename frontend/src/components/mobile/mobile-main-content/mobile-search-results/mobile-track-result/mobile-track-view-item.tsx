@@ -14,7 +14,7 @@ export default function MobileTrackViewItem({ item, results, error } : { item: a
         realReleaseDate = false
     }
     return (
-        <DialogContent showCloseButton={false}>
+        <DialogContent showCloseButton={true}>
             {/* Fix radix error with dialog title */}
             <DialogTitle asChild>
                 <VisuallyHidden>Hidden dialog title</VisuallyHidden>

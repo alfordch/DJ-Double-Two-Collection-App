@@ -20,7 +20,7 @@ export function MobileMainHeader({ headertext = "..."}) {
     icons.splice(usedIndex,1)
 
     return(
-        <header className="flex h-16 shrink-0 items-center gap-2 pl-2">
+        <header className="flex h-16 shrink-0 items-center gap-2">
             <NavigationMenu>
                 <NavigationMenuItem className="list-none">
                     <NavigationMenuTrigger>

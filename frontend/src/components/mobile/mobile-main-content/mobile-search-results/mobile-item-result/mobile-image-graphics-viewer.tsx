@@ -112,7 +112,7 @@ export default function MobileItemGraphicsViewer({ item } : { item: any }) {
     return (
         <div className="-mb-1">
             {carouselView &&
-                <div className="flex min-w-0 flex-1 items-center justify-center">
+                <div className="flex min-w-0 flex-1 items-center justify-center p-1.5">
                     {sortedWebGraphics.map((graphic, idx) => (
                         <img src={graphic.url} onClick={handleFullscreenClick} alt="result graphic" className={currentImage === idx ? 'block max-h-[80vh] max-w-full object-contain border-5 drop-shadow-lg border-accent rounded-lg cursor-pointer' : 'hidden'} key={idx}></img>
                     ))}

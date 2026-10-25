@@ -156,14 +156,14 @@ export default function MobileMainContent({ contentType } : { contentType: strin
 
     return (
         <div className="flex flex-col px-2 text-sm">
-            <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2">
+            <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2 pl-2">
                 <MobileMainHeader headertext={headerTexts[index]} />
                 <MobileAppInput placeholder={searchPlaceholders[index]} onSubmit={handleSearch} />
             </div>
 
             {/* <Separator orientation="horizontal" className="w-full mb-4" /> */}
             
-            <div className="flex flex-col ml-4 mr-4">
+            <div className="flex flex-col ml-2 mr-2">
                 {!loading && resultsLength !== 0 && searched && (
                     <p className="-mt-2 mb-2 font-bold text-md">{resultsLength} {lowerType} found</p>
                 )}

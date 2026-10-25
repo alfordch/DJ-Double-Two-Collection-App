@@ -50,7 +50,7 @@ export default function MobileTrackInfo({ track }: { track: any }) {
 
     return (
         <div>
-            <DialogContent showCloseButton={false} className="w-3/4">
+            <DialogContent showCloseButton={true} className="w-3/4">
                 {/* Fix radix error with dialog title */}
                 <DialogTitle asChild>
                     <VisuallyHidden>Hidden dialog title</VisuallyHidden>
@@ -77,7 +77,7 @@ export default function MobileTrackInfo({ track }: { track: any }) {
                         {loaded && <MobileTrackViewItem item={itemResult} results={tracksResult} error={error}/>}
                     </Dialog>
                     
-                    <p className="text-sm text-foreground leading-tight font-bold">{track.TrackItemLoc} | {track.TrackLength}</p>
+                    <p className="text-sm text-foreground leading-tight font-bold">{track.TrackItemLoc} · {track.TrackLength}</p>
                     
                     <Separator/>
 

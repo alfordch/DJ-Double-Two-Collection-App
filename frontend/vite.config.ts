@@ -18,11 +18,8 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       allowedHosts: [env.VITE_ALLOWED_HOST], // from .env
       proxy: {
-        '/tracks': 'http://localhost:3000',
-        '/items': 'http://localhost:3000',
-        '/artists': 'http://localhost:3000',
-        '/graphics': 'http://localhost:3000'
-      },
+        '^/(tracks|artists|items|graphics)/': 'http://localhost:3000',
+      },  
     },
     build: {
       outDir: 'dist',

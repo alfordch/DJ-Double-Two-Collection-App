@@ -7,7 +7,7 @@ import MobileTrackDrill from"@/components/mobile/mobile-main-content/mobile-sear
 
 export default function MobileViewTracksTable({ results, itemArtist }: { results: any, itemArtist: any }) { 
    return (
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col text-md">
          {results.map((result: any, idx: any) => (
             <Tooltip key={idx}>
                <TooltipTrigger>

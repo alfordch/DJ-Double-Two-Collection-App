@@ -53,7 +53,7 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                                  <Search className="w-15 h-15 cursor-pointer" />
                               </div>
                            </DialogTrigger>
-                           <DialogContent className="w-[85vw] !max-w-4xl" showCloseButton={false}>
+                           <DialogContent className="w-[85vw] !max-w-4xl" showCloseButton={true}>
                               <DialogTitle asChild>
                                  <VisuallyHidden>Hidden dialog title</VisuallyHidden>
                               </DialogTitle>
@@ -70,17 +70,17 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                <div className="flex flex-col items-center flex-shrink-0 gap-0 text-center">
                   <p className="font-bold leading-tight text-xl">{item.ItemName}</p>
                   <p className="text-lg">{item.ItemArtists}</p>
-                  <p>{item.ItemLabel} · {realReleaseDate ? <span>{item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span> : <span>{item.ItemReleaseYear}</span>}</p>
+                  <p className="text-sm">{item.ItemLabel} · {realReleaseDate ? <span>{item.ItemReleaseMonth}/{item.ItemReleaseDay}/{item.ItemReleaseYear}</span> : <span>{item.ItemReleaseYear}</span>}</p>
                   <p className="text-sm">{item.ItemTrackCount} tracks</p>
                </div>
                
                <div className="flex-shrink-0 drop-shadow-lg">
-                  <p className="text-md font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
+                  <p className="text-sm font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
                </div>
 
                <Separator orientation="horizontal" className="mt-2 mb-2 w-full flex-shrink-0"/>
                
-               <ScrollArea className="h-fit max-h-[35dvh] w-full">
+               <ScrollArea className="h-fit max-h-[28dvh] w-full">
                   <MobileViewTracksTable results={results} itemArtist={item.ItemArtists}/>
                </ScrollArea>
             </div>
@@ -93,7 +93,7 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
    }
 
    return (
-      <DialogContent showCloseButton className="flex max-h-[90dvh] w-[90vw] max-w-4xl flex-col overflow-hidden" >
+      <DialogContent showCloseButton={true} className="flex max-h-[80dvh] w-[90vw] max-w-4xl flex-col overflow-hidden" >
          {mobileViewTracksContent}
       </DialogContent>
    )
