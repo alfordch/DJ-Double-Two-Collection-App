@@ -128,7 +128,7 @@ export default function MobileItemGraphicsViewer({ item } : { item: any }) {
             }
 
             {gridView &&
-                <ScrollArea className={`${sortedWebGraphics.length >= 11 && 'h-[70vh]'}`}>
+                <ScrollArea /* className={`${sortedWebGraphics.length >= 10 && 'h-[70vh]'}`} */ className="h-fit max-h-[70vh]">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-3 py-3 items-center">
                         {sortedWebGraphics.map((graphic, idx) => (
                             // I love magic numbers

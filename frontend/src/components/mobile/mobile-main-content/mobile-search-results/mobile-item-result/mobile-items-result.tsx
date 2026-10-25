@@ -61,7 +61,7 @@ export default function MobileItemResult({ item }: { item: any }) {
                         <img src={`/fallbackGraphics/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                      )}
                   </div>
-                  <div className="flex flex-col flex-1 min-w-0">
+                  <div className="flex flex-col flex-1 min-w-0 break-words" style={{minWidth: 0, overflowWrap: "anywhere", wordBreak: "normal"}}>
                      <p className="font-bold leading-tight">{item.ItemName}</p>
                      <p className="text-sm font-bold text-muted-foreground leading-tight">{item.ItemArtists}</p>
                      <p className="text-sm italic text-muted-foreground leading-tight">{item.ItemLabel}</p>

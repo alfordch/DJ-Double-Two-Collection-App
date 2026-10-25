@@ -21,7 +21,7 @@ export default function MobileTrackResult({ track }: { track: any }) {
                      <img src={`/fallbackGraphics/${track.ItemCoverImage}`} alt={`${track.ItemName} cover`} onError={() => setImgError(true)} className="w-25 h-25 rounded-lg drop-shadow-lg border-3 border-black"/>
                   }
                </div>
-               <div className="flex flex-col flex-1 min-w-0">
+               <div className="flex flex-col flex-1 min-w-0 break-words" style={{minWidth: 0, overflowWrap: "anywhere", wordBreak: "normal"}}>
                   <p className="font-bold leading-tight">{track.TrackName}</p>
                   <p className="text-sm text-muted-foreground leading-tight font-bold">{track.TrackArtists}</p>
                   <p className="text-sm italic text-foreground leading-tight">{track.ItemName}</p>

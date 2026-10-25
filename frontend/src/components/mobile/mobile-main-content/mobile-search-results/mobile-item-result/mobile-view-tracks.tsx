@@ -32,12 +32,12 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
          <DialogTitle asChild>
             <VisuallyHidden>Hidden dialog title</VisuallyHidden>
          </DialogTitle>
-         <DialogHeader className="flex min-h-0 w-full flex-1 flex-col">
+         <DialogHeader className="flex min-h-0 flex-1 flex-col">
             {/* Fix radix error with dialog description */}
             <DialogDescription asChild>
                <VisuallyHidden>Hidden dialog description</VisuallyHidden>
             </DialogDescription>
-            <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-2">
+            <div className="flex min-h-0 flex-1 flex-col items-center gap-2">
                <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                   {!imgError ? 
                      <img src={imgSrc} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-55 h-55 rounded-lg drop-shadow-lg border-3 border-black"/>
@@ -78,9 +78,9 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
                   <p className="text-sm font-bold rounded-lg p-1 bg-accent">{item.ItemFormat}</p>
                </div> */}
 
-               <Separator orientation="horizontal" className="mt-1 mb-1 w-full flex-shrink-0"/>
+               <Separator orientation="horizontal" className="w-full flex-shrink-0"/>
                
-               <ScrollArea className="h-fit max-h-[30dvh] w-full">
+               <ScrollArea className="h-fit max-h-[30dvh]">
                   <MobileViewTracksTable results={results} itemArtist={item.ItemArtists}/>
                </ScrollArea>
             </div>
@@ -97,5 +97,4 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
          {mobileViewTracksContent}
       </DialogContent>
    )
-
 }
