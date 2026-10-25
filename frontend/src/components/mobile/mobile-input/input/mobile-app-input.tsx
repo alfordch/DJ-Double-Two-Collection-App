@@ -20,14 +20,15 @@ export function MobileAppInput({
    }
 
    return (
-      <form onSubmit={handleSubmit} className="flex max-w-sm items-center gap-1">
+      <form onSubmit={handleSubmit} className="flex items-center gap-1 pl-2">
          <Input
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             id="appInput"
+            className='min-w-0 flex-1'
          />
-         <Button type="button" variant="outline" onClick={() => { if (onSubmit) onSubmit("__shuffle__")}}>
+         <Button className='shrink-0' type="button" variant="outline" onClick={() => { if (onSubmit) onSubmit("__shuffle__")}}>
             <Shuffle/>
          </Button>
       </form>

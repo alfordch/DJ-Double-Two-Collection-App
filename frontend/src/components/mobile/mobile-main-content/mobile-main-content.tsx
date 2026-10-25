@@ -156,7 +156,7 @@ export default function MobileMainContent({ contentType } : { contentType: strin
 
     return (
         <div className="flex flex-col px-2 text-sm">
-            <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pr-2 pl-2">
+            <div className="flex items-center justify-between absolute sticky top-2 mt-1 rounded-lg backdrop-blur-2xl rounded-md z-10 shadow-xl mb-4 pl-2 pr-2">
                 <MobileMainHeader headertext={headerTexts[index]} />
                 <MobileAppInput placeholder={searchPlaceholders[index]} onSubmit={handleSearch} />
             </div>
