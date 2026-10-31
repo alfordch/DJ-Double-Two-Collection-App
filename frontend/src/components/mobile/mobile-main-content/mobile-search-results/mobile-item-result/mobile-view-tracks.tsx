@@ -80,7 +80,7 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
 
                <Separator orientation="horizontal" className="w-full flex-shrink-0"/>
                
-               <ScrollArea className="h-fit max-h-[30dvh]">
+               <ScrollArea className="h-fit max-h-[30dvh] w-full">
                   <MobileViewTracksTable results={results} itemArtist={item.ItemArtists}/>
                </ScrollArea>
             </div>
