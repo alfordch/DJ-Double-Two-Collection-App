@@ -25,6 +25,7 @@ export default function ViewTracks({ item, results, realReleaseDate, error }: { 
    if (specialGraphicsList.includes(item.ItemID)) {
       imgSrc = `/webGraphics/${item.ItemID}/graphics/Cover_1.webp`
    }
+
    return (
       <div>
          <DialogContent showCloseButton={true} className="w-3/4 !max-w-4xl max-h-99/100">
@@ -79,10 +80,8 @@ export default function ViewTracks({ item, results, realReleaseDate, error }: { 
 
                <Separator orientation="horizontal" className="mt-2 mb-2"/>
                
-               <ScrollArea type="always" className={`${results.length > 7 && 'h-100'}`}>
-                  <div className={`${results.length > 7 && "pr-3"}`}>
-                        <ViewTracksTable results={results} itemArtist={item.ItemArtists}></ViewTracksTable>
-                  </div>
+               <ScrollArea type="always" className="h-fit max-h-[55dvh] w-full">
+                  <ViewTracksTable results={results} itemArtist={item.ItemArtists}></ViewTracksTable>
                </ScrollArea>
             </DialogHeader>
             {/* <DialogFooter>
