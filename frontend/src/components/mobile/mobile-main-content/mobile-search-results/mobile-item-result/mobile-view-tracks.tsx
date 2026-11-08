@@ -40,7 +40,7 @@ export default function MobileViewTracks({ item, results, realReleaseDate, error
             <div className="flex min-h-0 flex-1 flex-col items-center gap-2">
                <div className="relative flex-shrink-0 bg-cover bg-no-repeat">
                   {!imgError ? 
-                     <img src={imgSrc} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-55 h-55 rounded-lg drop-shadow-lg border-3 border-black"/>
+                     <img src={imgSrc} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
                   :
                      <img src={`/fallbackGraphics/${item.ItemCoverImage}`} alt={`${item.ItemName} cover`} onError={() => setImgError(true)} className="w-45 h-45 rounded-lg drop-shadow-lg border-3 border-black"/>
                   }
